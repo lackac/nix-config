@@ -1,0 +1,26 @@
+{lib}: {
+  username = "lackac";
+  userfullname = "Laszlo Bacsi";
+  useremail = "lackac@lackac.hu";
+
+  networking = import ./networking.nix {inherit lib;};
+
+  # Public Keys that can be used to login to all my PCs, Macbooks, and servers.
+  #
+  # Since its authority is so large, we must strengthen its security:
+  # 1. The corresponding private key must be:
+  #    1. Generated locally on every trusted client via:
+  #      ```bash
+  #      # KDF: bcrypt with 256 rounds, takes 2s on Apple M2):
+  #      # Passphrase: digits + letters + symbols, 12+ chars
+  #      ssh-keygen -t ed25519 -a 256 -C "lackac@xxx" -f ~/.ssh/xxx`
+  #      ```
+  #    2. Never leave the device and never sent over the network.
+  # 2. Or just use hardware security keys like Yubikey/CanoKey.
+  mainSshAuthorizedKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINdW8eys/HTknDK+eMcAjeiITC+T7uDGbpaUNydsj7PZ lackac@lithium"
+  ];
+  secondaryAuthorizedKeys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAsSjqo64NbOXu0KKr0Zca7sAmoNG/N4qKFbsi82+uRJ8NRu7ALuuajgUCS3iiAaeVhzNlqh4YBceSQXlAczLwBPFiKSFAzur7iK44gXENn35KDPt3j1g6+ksywUudHaacz7/pY3YGSy2lDeurLNL5SlM2KzSAZdgyPkjvbguBQpBbNrMOv+524UYrWY1owpR4S955ykKoWTzDXYC5HwBDaRsYxJlB7LdeAEcBt/gAx0UQGvBI4RmLrpFrcSgYs2DD/QJi8XzzG1N/ihzhrBhFkBsBLX37A36ZIAlPQP5rl5WA6ZhBSWhNbv1CIW6Zosjf5sESC0K3qs3JPDzsN7oQfw== strongkey@lackac.hu"
+  ];
+}
