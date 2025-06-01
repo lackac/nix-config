@@ -31,6 +31,7 @@
     };
 
     keybindings = {
+      "allow_remote_control" = "yes";
       "kitty_mod+c" = "copy_to_clipboard";
       "kitty_mod+v" = "paste_from_clipboard";
       "kitty_mod+n" = "new_os_window";
@@ -50,9 +51,9 @@
       "alt+." = "send_text all \e.";
     };
 
-    extraConfig = ''
-      allow_remote_control yes
-      listen_on unix:$${HOME}/.local/state/kitty/kitty
-    '';
+    darwinLaunchOptions = [
+      "--single-instance"
+      "--listen-on=unix:~/Library/Caches/TemporaryItems/runtime/kitty"
+    ];
   };
 }
