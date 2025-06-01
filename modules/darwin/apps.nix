@@ -41,21 +41,46 @@
     };
 
     # `brew install`
-    # TODO Feel free to add your favorite apps here.
     brews = [
-      # "m-cli"
+      "m-cli" #  Swiss Army Knife for macOS
     ];
 
     # `brew install --cask`
-    # TODO Feel free to add your favorite apps here.
     casks = [
-      # "google-chrome"
+      "brave-browser"
+
+      # productivity
+      "dash"
+      "google-drive"
+      "hammerspoon"
+      "jordanbaird-ice" # open source Bartender alternative menu bar manager for macOS
+      "shortcat"
+
+      # work related
+      "microsoft-teams"
+      "session-manager-plugin"
+      "slack"
+      "tableplus"
+      "zoom"
+
+      # gaming
+      "curseforge"
+      "minecraft"
+
+      # media
+      "vlc"
+
+      # misc
+      "prusaslicer"
     ];
 
     # Applications to install from Mac App Store using mas.
     # For details, see https://github.com/mas-cli/mas
     masApps = {
-      # "The Unarchiver" = 425424353;
+      "Affinity Photo" = 824183456;
+      "Affinity Designer" = 824171161;
+      "Perplexity" = 6714467650;
+      "The Unarchiver" = 425424353;
     };
   };
 }
