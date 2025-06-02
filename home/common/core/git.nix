@@ -13,6 +13,25 @@
     rm -f ${config.home.homeDirectory}/.gitconfig
   '';
 
+  # shell aliases specific to git
+  home.shellAliases = {
+    gst = "git status -sb";
+    gl = "git log --decorate --graph --pretty='%C(auto)%h%d %C(bold)%s %C(blue)%ar%Creset %ad' --date=iso";
+    glb = "gl --branches";
+    glp = "git log -p --decorate";
+    gco = "git checkout";
+    gcb = "git checkout -b";
+    gc = "git commit -v";
+    gca = "git commit -v -a";
+    gcp = "git cherry-pick";
+    gp = "git push";
+    gpo = "git push origin";
+    gpu = "git push -u origin";
+    gll = "git pull";
+    gsps = "git stash && git pull && git stash pop";
+    gm = "git merge --no-ff";
+  };
+
   programs.git = {
     enable = true;
     lfs.enable = true;
