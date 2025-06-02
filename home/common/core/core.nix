@@ -105,8 +105,8 @@
       enable = true;
       config = {
         pager = "less -FR";
+        theme = "Solarized (light)";
       };
-      theme = "Solarized (light)";
     };
 
     # A modern replacement for ‘ls’
