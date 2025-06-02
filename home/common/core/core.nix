@@ -39,6 +39,22 @@
     croc # File transfer between computers securely and easily
   ];
 
+  # shell aliases for the programs listed below
+  home.shellAliases = {
+    l="eza -l";
+    lk="eza -l --sort=size";
+    lm="eza -l --sort=modified";
+    lc="eza -l --sort=changed";
+    lu="eza -l --sort=accessed";
+  };
+
+  # custom configuration for the programs listed below
+  home.sessionVariables = {
+    BAT_STYLE = "plain";
+    # colors for jq which work in both light and dark themes
+    JQ_COLORS = "2;35:0;31:0;32:0;33:0;36:0;34:0;34:1;34";
+  };
+
   programs = {
     # Atuin replaces your existing shell history with a SQLite database,
     # and records additional context for your commands.
@@ -48,6 +64,40 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      flags = [
+        "--disable-up-arrow"
+      ];
+      settings = {
+        dialect = "uk";
+        inline_height = 25;
+        common_subcommands = [
+          "apt"
+          "cargo"
+          "composer"
+          "dnf"
+          "docker"
+          "git"
+          "go"
+          "ip"
+          "jj"
+          "kubectl"
+          "nix"
+          "nmcli"
+          "npm"
+          "pecl"
+          "pnpm"
+          "podman"
+          "port"
+          "systemctl"
+          "tmux"
+          "yarn"
+
+          "aws"
+          "100s"
+          "cplus"
+          "t"
+        ];
+      };
     };
 
     # a cat(1) clone with syntax highlighting and Git integration.
@@ -56,6 +106,7 @@
       config = {
         pager = "less -FR";
       };
+      theme = "Solarized (light)";
     };
 
     # A modern replacement for ‘ls’
@@ -70,6 +121,18 @@
     # A command-line fuzzy finder
     fzf = {
       enable = true;
+      defaultCommand = "fd -type f";
+
+      changeDirWidgetCommand = "fd -type d";
+      changeDirWidgetOptions = "--preview 'tree -C {} | head -200'";
+      fileWidgetCommand = "fd -type f";
+      fileWidgetOptions = "--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'";
+      historyWidgetOptions = "--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'";
+
+      tmux = {
+        enableShellIntegration = true;
+        shellIntegrationOptions = [ "-p80%,60%" ];
+      };
     };
 
     # very fast version of tldr in Rust
