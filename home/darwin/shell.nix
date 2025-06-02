@@ -2,6 +2,7 @@ _:
 let
   envExtra = ''
     export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+    mkdir -p -m 700 $XDG_RUNTIME_DIR
   '';
 in {
   # Homebrew's default install location:
