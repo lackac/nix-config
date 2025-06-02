@@ -20,6 +20,7 @@
     yq-go # same as jq, but for YAML
 
     # Misc
+    gcal
     gnupg
     gnumake
 

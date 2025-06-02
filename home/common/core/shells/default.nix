@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   ...
 }: let
@@ -7,7 +6,7 @@
     psg = "ps aux | grep";
     mwget = "wget -v -c -x -r -l 0 -L -np";
 
-    cal = "${if pkgs.stdenv.isDarwin then "gcal" else "cal"} -s1 -H '\e[44;37m:\e[0m:\e[42;37m:\e[0m'";
+    cal = "gcal -s1 -H '\\e[44;37m:\\e[0m:\\e[42;37m:\\e[0m'";
     cal-hu = "cal -qHU";
     cal-en = "cal -qGB_EN";
     cal-gb = "cal-en";
