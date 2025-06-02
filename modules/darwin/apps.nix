@@ -77,8 +77,6 @@
     # Applications to install from Mac App Store using mas.
     # For details, see https://github.com/mas-cli/mas
     masApps = {
-      "Affinity Photo" = 824183456;
-      "Affinity Designer" = 824171161;
       "Perplexity" = 6714467650;
       "The Unarchiver" = 425424353;
     };
