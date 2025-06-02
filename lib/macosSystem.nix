@@ -9,7 +9,7 @@
   specialArgs ? (genSpecialArgs system),
   ...
 }: let
-  inherit (inputs) nixpkgs-darwin home-manager nix-darwin nix-homebrew homebrew-core homebrew-cask;
+  inherit (inputs) nixpkgs-darwin home-manager nix-darwin nix-homebrew homebrew-core homebrew-cask stylix;
 in
   nix-darwin.lib.darwinSystem {
     inherit system specialArgs;
@@ -23,6 +23,7 @@ in
             config.allowUnfree = true;
           };
         })
+        stylix.darwinModules.stylix
       ]
       ++ [
         nix-homebrew.darwinModules.nix-homebrew {

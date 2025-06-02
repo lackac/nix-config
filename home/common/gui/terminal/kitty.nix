@@ -6,20 +6,7 @@
   programs.kitty = {
     enable = true;
 
-    # kitty has catppuccin theme built-in,
-    # all the built-in themes are packaged into an extra package named `kitty-themes`
-    # and it's installed by home-manager if `theme` is specified.
-    themeFile = "Catppuccin-Mocha";
-
-    font = {
-      name = "CaskaydiaCove Nerd Font Mono Light";
-      size = if pkgs.stdenv.isDarwin then 14 else 13;
-    };
-
     settings = {
-      bold_font = "CaskaydiaCove Nerd Font Mono Semibold";
-      italic_font = "CaskaydiaCove Nerd Font Mono Light Italic";
-      bold_italic_font = "CaskaydiaCove Nerd Font Mono Semibold Italic";
       adjust_line_height = "100%";
       adjust_column_width = "100%";
       disable_ligatures = "cursor";
