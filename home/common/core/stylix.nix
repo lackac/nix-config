@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/solarized-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
+    polarity = "light";
 
     fonts = {
       serif = {
@@ -40,5 +41,10 @@
       tmux.enable = true;
       yazi.enable = true;
     };
+  };
+
+  specialisation.dark.configuration.stylix = {
+    base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/solarized-dark.yaml";
+    polarity = lib.mkForce "dark";
   };
 }
