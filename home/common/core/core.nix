@@ -109,6 +109,11 @@
       };
     };
 
+    # replacement of htop/nmon
+    btop = {
+      enable = true;
+    };
+
     # A modern replacement for ‘ls’
     # useful in bash/zsh prompt, not in nushell.
     eza = {
@@ -147,6 +152,19 @@
         updates = {
           auto_update = false;
           auto_update_interval_hours = 720;
+        };
+      };
+    };
+
+    # terminal file manager
+    yazi = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      settings = {
+        manager = {
+          show_hidden = true;
+          sort_dir_first = true;
         };
       };
     };

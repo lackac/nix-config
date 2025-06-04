@@ -33,6 +33,7 @@
     autoEnable = false;
     targets = {
       bat.enable = true;
+      btop.enable = true;
       fzf.enable = true;
       kitty.enable = true;
       lazygit.enable = true;
