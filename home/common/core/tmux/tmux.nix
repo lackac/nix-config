@@ -17,7 +17,17 @@
       tmuxPlugins.open
       tmuxPlugins.yank
       {
-        plugin = tmuxPlugins.vim-tmux-navigator;
+        plugin = tmuxPlugins.mkTmuxPlugin {
+          pluginName = "vim-tmux-navigator";
+          rtpFilePath = "vim-tmux-navigator.tmux";
+          version = "unstable-2025-06-02";
+          src = fetchFromGitHub {
+            owner = "christoomey";
+            repo = "vim-tmux-navigator";
+            rev = "97e58f2b3b4f8fd30ce149302f10202f363cc361";
+            hash = "sha256-QxrKtjGMog1N/oa1aJWO1qsG2xppOCdHFaDevHx76XU=";
+          };
+        };
         extraConfig = ''
           set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
           set -g @vim_navigator_mapping_right "C-Right C-l"
