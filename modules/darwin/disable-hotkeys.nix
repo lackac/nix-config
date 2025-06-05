@@ -18,8 +18,9 @@ let
     saveSelectionToFile                   = 30;  # Shift-Command-4
     copySelectionToClipboard              = 31;  # Control-Shift-Command-4
     missionControl                        = 32;  # Control-UpArrow (standard key combination)
+    applicationWindows                    = 33;  # Control-DownArrow
     missionControlDedicatedKey            = 34;  # Control-UpArrow (often for a dedicated key like F3, params differ)
-    applicationWindows                    = 35;  # Control-DownArrow
+    applicationWindowsDedicatedKey        = 35;  # Control-DownArrow
     showDesktop                           = 36;  # fn-F11 (standard key combination)
     showDesktopDedicatedKey               = 37;  # fn-F11 (often for a dedicated key, params differ)
     moveFocusToWindowDrawer               = 51;  # Option-Command-'
@@ -30,6 +31,7 @@ let
     increaseDisplayBrightnessDedicatedKey = 56;  # fn-F15 (dedicated key, params differ)
     moveFocusToStatusMenus                = 57;  # Control-fn-F8
     selectPreviousInputSource             = 60;  # Control-Space bar (if multiple inputs)
+    selectNextInputSource                 = 61;  # Control-Option-Space bar (if multiple inputs)
     showSpotlightSearch                   = 64;  # Command-Space bar
     moveLeftASpace                        = 79;  # Control-LeftArrow (standard key combination)
     moveLeftASpaceDedicatedKey            = 80;  # Control-LeftArrow (dedicated key, params differ)
@@ -38,6 +40,7 @@ let
     switchToDesktop1                      = 118; # Control-1
     switchToDesktop2                      = 119; # Control-2
     switchToDesktop3                      = 120; # Control-3
+    showContextualMenu                    = 159; # Control-Return
     showLaunchpad                         = 160; # None (default is disabled)
     showNotificationCenter                = 163; # None (default is disabled)
     turnDoNotDisturbOnOff                 = 175; # None (default is disabled)
@@ -50,21 +53,18 @@ let
   # If you want to disable all hotkeys, you can use the `hotkeyEnums` directly
   # If you want to keep some hotkeys enabled, simply comment them out or remove them from the following list.
   disableHotKeys = with hotkeyEnums; [
-    missionControl                # 32
-    applicationWindows            # 35
-    moveFocusToWindowDrawer       # 51
-    turnDockHidingOnOff           # 52
-    selectPreviousInputSource     # 60
-    moveLeftASpace                # 79
-    moveLeftASpaceDedicatedKey    # 80
-    moveRightASpace               # 81
-    moveRightASpaceDedicatedKey   # 82
-    switchToDesktop1              # 118
-    switchToDesktop2              # 119
-    switchToDesktop3              # 120
-    showLaunchpad                 # 160
-    showNotificationCenter        # 163
-    turnDoNotDisturbOnOff         # 175
+    missionControl
+    missionControlDedicatedKey
+    applicationWindows
+    applicationWindowsDedicatedKey
+    turnDockHidingOnOff
+    selectPreviousInputSource
+    selectNextInputSource
+    moveLeftASpace
+    moveLeftASpaceDedicatedKey
+    moveRightASpace
+    moveRightASpaceDedicatedKey
+    showContextualMenu
   ];
 
   uniqueSortedHotkeyIntegerIdsToDisable = lib.sort lib.lessThan disableHotKeys;
