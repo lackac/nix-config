@@ -1,4 +1,9 @@
-{pkgs, lib, config, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
@@ -26,7 +31,10 @@
       };
 
       sizes = {
-        terminal = if pkgs.stdenv.isDarwin then 14 else 13;
+        terminal =
+          if pkgs.stdenv.isDarwin
+          then 14
+          else 13;
       };
     };
 
@@ -39,7 +47,6 @@
       lazygit.enable = true;
       neovim.enable = true;
       starship.enable = true;
-      tmux.enable = true;
       yazi.enable = true;
     };
   };
@@ -52,11 +59,11 @@
   home.packages = [
     (pkgs.writeShellApplication {
       name = "theme";
-      runtimeInputs = with pkgs; [ home-manager coreutils ripgrep ];
+      runtimeInputs = with pkgs; [home-manager coreutils ripgrep];
       runtimeEnv = {
         XDG_RUNTIME_DIR = config.home.sessionVariables.XDG_RUNTIME_DIR;
       };
-      excludeShellChecks = [ "SC2018" "SC2019" "SC2086" ];
+      excludeShellChecks = ["SC2018" "SC2019" "SC2086"];
       text = ''
         theme="''${1-}"
 
