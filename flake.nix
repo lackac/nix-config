@@ -54,5 +54,11 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # my Neovim configuration with nvf
+    nvf-config = {
+      url = "github:lackac/nvf-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

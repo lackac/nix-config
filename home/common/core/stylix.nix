@@ -61,7 +61,7 @@
       name = "theme";
       runtimeInputs = with pkgs; [home-manager coreutils ripgrep];
       runtimeEnv = {
-        XDG_RUNTIME_DIR = config.home.sessionVariables.XDG_RUNTIME_DIR;
+        inherit (config.home.sessionVariables) XDG_RUNTIME_DIR;
       };
       excludeShellChecks = ["SC2018" "SC2019" "SC2086"];
       text = ''
@@ -107,8 +107,9 @@
             kitty*)
               kitty @ --to "unix:$socket_path" load-config
               ;;
-            nvim.*)
+            nvim.* | nvf.*)
               pid="''${socket#nvim.}"
+              pid="''${pid#nvf.}"
               pid="''${pid%.*}"
               if ps -p $pid > /dev/null; then
                 nvim --server "$socket_path" --remote-expr "nvim_set_option('background', '$theme')"
