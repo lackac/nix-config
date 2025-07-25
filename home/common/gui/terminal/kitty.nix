@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   programs.kitty = {
     enable = true;
 
@@ -14,7 +10,10 @@
       confirm_os_window_close = "0";
       clipboard_control = "write-clipboard write-primary read-clipboard read-primary no-append";
       macos_quit_when_last_window_closed = true;
-      kitty_mod = if pkgs.stdenv.isDarwin then "cmd" else "ctrl+shift";
+      kitty_mod =
+        if pkgs.stdenv.isDarwin
+        then "cmd"
+        else "ctrl+shift";
       clear_all_shortcuts = true;
     };
 
@@ -38,8 +37,12 @@
       "alt+." = "send_text all \\e.";
     };
 
-    darwinLaunchOptions = [
-      "--listen-on=unix:~/Library/Caches/TemporaryItems/runtime/kitty"
-    ];
+    extraConfig = ''
+      listen_on unix:${
+        if pkgs.stdenv.isDarwin
+        then "~/Library/Caches/TemporaryItems/runtime/kitty"
+        else "$${XDG_RUNTIME_DIR}/kitty"
+      }
+    '';
   };
 }
