@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.tmux = {
     enable = true;
 
@@ -18,22 +17,21 @@
       tmuxPlugins.yank
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
-          pluginName = "vim-tmux-navigator";
-          rtpFilePath = "vim-tmux-navigator.tmux";
-          version = "unstable-2025-06-02";
+          pluginName = "smart-splits";
+          rtpFilePath = "smart-splits.tmux";
+          version = "v2.0.3";
           src = fetchFromGitHub {
-            owner = "christoomey";
-            repo = "vim-tmux-navigator";
-            rev = "97e58f2b3b4f8fd30ce149302f10202f363cc361";
-            hash = "sha256-QxrKtjGMog1N/oa1aJWO1qsG2xppOCdHFaDevHx76XU=";
+            owner = "mrjones2014";
+            repo = "smart-splits.nvim";
+            rev = "v2.0.3";
+            hash = "sha256-zfuBaSnudCWw0N1XAms9CeVrAuPEAPDXxLLg1rTX7FE=";
           };
         };
         extraConfig = ''
-          set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
-          set -g @vim_navigator_mapping_right "C-Right C-l"
-          set -g @vim_navigator_mapping_up "C-Up C-k"
-          set -g @vim_navigator_mapping_down "C-Down C-j"
-          set -g @vim_navigator_mapping_prev ""
+          bind-key -n C-Left if -F "#{@pane-is-vim}" 'send-keys C-h'  'select-pane -L'
+          bind-key -n C-Down if -F "#{@pane-is-vim}" 'send-keys C-j'  'select-pane -D'
+          bind-key -n C-Up if -F "#{@pane-is-vim}" 'send-keys C-k'  'select-pane -U'
+          bind-key -n C-Right if -F "#{@pane-is-vim}" 'send-keys C-l'  'select-pane -R'
         '';
       }
     ];
