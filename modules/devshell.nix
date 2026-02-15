@@ -4,7 +4,7 @@
       packages = with pkgs; [
         # Nix tools
         nil
-        nixfmt-rfc-style
+        nixfmt
 
         # Secrets
         age
