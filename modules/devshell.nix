@@ -13,8 +13,8 @@
 
         # Deployment
         inputs.colmena.packages.${system}.colmena
-        nixos-anywhere
-        nixos-rebuild
+        # nixos-anywhere and nixos-rebuild omitted: they pull in upstream nix
+        # which shadows Determinate Nix. Run via `nix run` when needed.
 
         # Utilities
         just
