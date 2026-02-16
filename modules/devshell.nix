@@ -17,6 +17,7 @@
         # which shadows Determinate Nix. Run via `nix run` when needed.
 
         # Utilities
+        git
         just
         pwgen
       ];
