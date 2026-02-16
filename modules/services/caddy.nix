@@ -1,5 +1,5 @@
-{ config, pkgs, ... }: {
-  flake.modules.nixos.caddy = {
+{ ... }: {
+  flake.modules.nixos.caddy = { pkgs, config, ... }: {
     services.caddy = {
       enable = true;
       package = pkgs.caddy.withPlugins {
