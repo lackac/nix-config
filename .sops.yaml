@@ -1,12 +1,15 @@
 keys:
-  - &carbon age1PLACEHOLDER_CARBON_KEY
+  - &admin age1epcht3qe6977l3klzdcpqjzr4lrpz7v5tp4cxzfzls8ppm0ptg7syntqqh
+  - &carbon age1tampdp59kp5a4q2mz3wmwpvv4xv0p0ez6mndnru8wvc9tv00k4gqsln8v3
 
 creation_rules:
   - path_regex: secrets/common\.yaml$
     key_groups:
       - age:
-          - *carbon
+        - *admin
+        - *carbon
   - path_regex: secrets/carbon\.yaml$
     key_groups:
       - age:
-          - *carbon
+        - *admin
+        - *carbon
