@@ -1,6 +1,7 @@
 { inputs, ... }: {
-  flake.modules.nixos.hardware-n100 = { ... }: {
+  flake.modules.nixos.hardware-n100 = { lib, modulesPath, ... }: {
     imports = [
+      (modulesPath + "/installer/scan/not-detected.nix")
       inputs.nixos-hardware.nixosModules.common-cpu-intel
       inputs.nixos-hardware.nixosModules.common-pc-ssd
     ];
@@ -15,6 +16,6 @@
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
 
-    networking.useDHCP = true;
+    networking.useDHCP = lib.mkDefault true;
   };
 }
