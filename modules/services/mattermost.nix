@@ -2,14 +2,10 @@
   flake.modules.nixos.mattermost = { config, ... }: {
     services.mattermost = {
       enable = true;
-      siteUrl = "http://${config.networking.hostName}:8065";
+      siteUrl = "https://mm.lackac.hu";
       port = 8065;
-      host = "0.0.0.0";
+      host = "127.0.0.1";
       mutableConfig = false;
-    };
-
-    networking.firewall.interfaces."tailscale0" = {
-      allowedTCPPorts = [ 8065 ];
     };
   };
 }
