@@ -57,7 +57,7 @@ The dendritic pattern avoids `specialArgs` because flake-parts modules share `co
 sops-nix with age encryption. Per-host `.yaml` files in `secrets/`. Age keys derived from host SSH keys.
 
 ### Deployment
-Colmena for NixOS hosts over Tailscale. nixos-anywhere for initial provisioning. Darwin hosts build locally.
+Colmena for NixOS hosts over Tailscale. nixos-anywhere for initial provisioning (run via `nix run` when needed). Darwin hosts build locally.
 
 ### External to Nix
 Hammerspoon config stays outside nix.
@@ -70,7 +70,7 @@ Hammerspoon config stays outside nix.
 - Create: `flake.nix`
 - Create: `.gitignore`
 - Create: `.envrc`
-- Create: `modules/_placeholder.nix`
+- Create: `modules/placeholder.nix`
 
 **Step 1:** Create `flake.nix`. Note the import of `flake-parts.flakeModules.modules` which enables the `flake.modules.<class>.<aspect>` option:
 
@@ -80,8 +80,6 @@ Hammerspoon config stays outside nix.
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
-
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -131,6 +129,8 @@ Hammerspoon config stays outside nix.
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" "aarch64-darwin" ];
+
       imports = [
         inputs.flake-parts.flakeModules.modules
         (inputs.import-tree ./modules)
@@ -157,11 +157,13 @@ if [ -f .envrc.local ]; then
 fi
 ```
 
-**Step 4:** Create `modules/_placeholder.nix` (import-tree needs at least one file; remove when real modules exist):
+**Step 4:** Create `modules/placeholder.nix` (import-tree ignores `_` paths; remove when real modules exist):
 
 ```nix
 # Placeholder - remove when real modules exist
-{ }
+{ ... }: {
+  flake.modules.nixos.placeholder = { };
+}
 ```
 
 **Step 5:** Run `nix flake check` to verify the flake evaluates.
@@ -170,7 +172,7 @@ fi
 
 ```bash
 git add -A
-git commit -m "feat: initialize dendritic flake with flake-parts + import-tree"
+git commit -m "chore: initialize dendritic flake with flake-parts + import-tree"
 ```
 
 ---
@@ -180,7 +182,7 @@ git commit -m "feat: initialize dendritic flake with flake-parts + import-tree"
 **Files:**
 - Create: `modules/devshell.nix`
 - Create: `modules/formatter.nix`
-- Delete: `modules/_placeholder.nix`
+- Delete: `modules/placeholder.nix`
 
 **Step 1:** Create `modules/devshell.nix`:
 
@@ -191,7 +193,7 @@ git commit -m "feat: initialize dendritic flake with flake-parts + import-tree"
       packages = with pkgs; [
         # Nix tools
         nil
-        nixfmt-rfc-style
+        nixfmt
 
         # Secrets
         age
@@ -200,10 +202,9 @@ git commit -m "feat: initialize dendritic flake with flake-parts + import-tree"
 
         # Deployment
         inputs.colmena.packages.${system}.colmena
-        nixos-anywhere
-        nixos-rebuild
 
         # Utilities
+        git
         just
         pwgen
       ];
@@ -217,12 +218,12 @@ git commit -m "feat: initialize dendritic flake with flake-parts + import-tree"
 ```nix
 { ... }: {
   perSystem = { pkgs, ... }: {
-    formatter = pkgs.nixfmt-rfc-style;
+    formatter = pkgs.nixfmt;
   };
 }
 ```
 
-**Step 3:** Remove `modules/_placeholder.nix`.
+**Step 3:** Remove `modules/placeholder.nix`.
 
 **Step 4:** Run `nix flake check` and `nix develop -c echo "devshell works"`.
 
@@ -230,7 +231,7 @@ git commit -m "feat: initialize dendritic flake with flake-parts + import-tree"
 
 ```bash
 git add -A
-git commit -m "feat: add development shell and formatter"
+git commit -m "chore: add development shell and formatter"
 ```
 
 ---
@@ -318,7 +319,7 @@ Note how `vars` is accessed directly from flake-parts `config` via let-binding. 
 
 ```bash
 git add -A
-git commit -m "feat: add common platform base and shared variables"
+git commit -m "chore: add common platform base and shared variables"
 ```
 
 ---
@@ -357,7 +358,7 @@ git commit -m "feat: add common platform base and shared variables"
 
 ```bash
 git add -A
-git commit -m "feat: add NixOS server base module"
+git commit -m "chore: add NixOS server base module"
 ```
 
 ---
@@ -372,8 +373,9 @@ git commit -m "feat: add NixOS server base module"
 
 ```nix
 { inputs, ... }: {
-  flake.modules.nixos.hardware-n100 = { ... }: {
+  flake.modules.nixos.hardware-n100 = { lib, modulesPath, ... }: {
     imports = [
+      (modulesPath + "/installer/scan/not-detected.nix")
       inputs.nixos-hardware.nixosModules.common-cpu-intel
       inputs.nixos-hardware.nixosModules.common-pc-ssd
     ];
@@ -388,7 +390,7 @@ git commit -m "feat: add NixOS server base module"
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
 
-    networking.useDHCP = true;
+    networking.useDHCP = lib.mkDefault true;
   };
 }
 ```
@@ -449,7 +451,7 @@ git commit -m "feat: add NixOS server base module"
 
 ```bash
 git add -A
-git commit -m "feat: add N100 hardware and disko config"
+git commit -m "chore: add N100 hardware and disko config"
 ```
 
 ---
@@ -494,7 +496,7 @@ creation_rules:
 
 ```bash
 git add -A
-git commit -m "feat: add sops-nix secrets structure"
+git commit -m "chore: add sops-nix secrets structure"
 ```
 
 ---
@@ -517,7 +519,6 @@ git commit -m "feat: add sops-nix secrets structure"
 
     sops.secrets."tailscale/authKey" = { };
 
-    networking.firewall.trustedInterfaces = [ "tailscale0" ];
   };
 }
 ```
@@ -545,8 +546,8 @@ git commit -m "feat: add Tailscale module for NixOS servers"
   flake.modules.nixos.postgres = { pkgs, ... }: {
     services.postgresql = {
       enable = true;
-      package = pkgs.postgresql_16;
-      dataDir = "/var/lib/postgresql/16";
+      package = pkgs.postgresql_18;
+      dataDir = "/var/lib/postgresql/18";
     };
   };
 }
@@ -575,25 +576,18 @@ git commit -m "feat: add Postgres module"
   flake.modules.nixos.mattermost = { config, ... }: {
     services.mattermost = {
       enable = true;
-      siteUrl = "http://${config.networking.hostName}:8065";
-      listenAddress = "0.0.0.0:8065";
-      localDatabaseCreate = true;
+      siteUrl = "https://mm.lackac.hu";
+      port = 8065;
+      host = "127.0.0.1";
       mutableConfig = false;
-
-      extraConfig = {
-        ServiceSettings.ListenAddress = ":8065";
-        FileSettings.Directory = "/var/lib/mattermost/files";
-      };
     };
 
-    networking.firewall.interfaces."tailscale0" = {
-      allowedTCPPorts = [ 8065 ];
-    };
+    # Firewall is handled by Caddy (Task 9.5)
   };
 }
 ```
 
-Note: Verify `services.mattermost` NixOS module options during implementation.
+Note: `services.mattermost` options are `siteUrl`, `port`, and `host`.
 
 **Step 2:** Run `nix flake check`.
 
@@ -602,6 +596,89 @@ Note: Verify `services.mattermost` NixOS module options during implementation.
 ```bash
 git add -A
 git commit -m "feat: add Mattermost module"
+```
+
+---
+
+## Task 9.5: Caddy reverse proxy for HTTPS
+
+**Files:**
+- Create: `modules/services/caddy.nix`
+- Modify: `modules/services/mattermost.nix`
+- Modify: `modules/networking/tailscale.nix`
+- Modify: `modules/hosts/carbon.nix`
+
+**Step 1:** Create `modules/services/caddy.nix` with DNSimple DNS-01 support:
+
+```nix
+{ config, pkgs, ... }: {
+  flake.modules.nixos.caddy = {
+    services.caddy = {
+      enable = true;
+      package = pkgs.caddy.withPlugins {
+        plugins = [ "github.com/caddy-dns/dnsimple" ];
+        hash = "sha256-REPLACE_WITH_REAL_HASH";
+      };
+
+      email = "admin@lackac.hu";
+      globalConfig = ''
+        acme_dns dnsimple {
+          token {$DNSIMPLE_TOKEN}
+        }
+      '';
+      extraConfig = ''
+        mm.lackac.hu {
+          reverse_proxy 127.0.0.1:8065
+        }
+      '';
+    };
+
+    systemd.services.caddy.serviceConfig.EnvironmentFile =
+      config.sops.secrets."dnsimple/token".path;
+  };
+}
+```
+
+**Step 2:** Add `sops` secret stub for DNSimple API token in `secrets/carbon.yaml`:
+
+```yaml
+dnsimple:
+  token: "YOUR_DNSIMPLE_TOKEN"
+```
+
+**Step 2.5:** Add DNS record in DNSimple:
+
+```
+mm.lackac.hu CNAME carbon.at-larch.ts.net
+```
+
+**Step 3:** Ensure Mattermost binds to localhost (already set in Task 9). Keep port 8065.
+
+**Step 4:** Allow HTTPS only on Tailscale (port 443). Remove any `trustedInterfaces` rules and set:
+
+```nix
+networking.firewall.interfaces."tailscale0" = {
+  allowedTCPPorts = [ 443 ];
+};
+```
+
+**Step 5:** Add `caddy` to the carbon host module list.
+
+**Step 6:** Run `nix flake check`.
+
+**Step 7:** Build Caddy once to get the plugin hash (from devshell):
+
+```bash
+nix build .#packages.x86_64-linux.caddy
+```
+
+Replace `sha256-REPLACE_WITH_REAL_HASH` with the reported hash and re-run the build.
+
+**Step 8:** Commit:
+
+```bash
+git add -A
+git commit -m "feat: add Caddy reverse proxy with DNSimple DNS-01"
 ```
 
 ---
@@ -633,6 +710,7 @@ git commit -m "feat: add Mattermost module"
           tailscale
           postgres
           mattermost
+          caddy
         ])
         ++ [
           # Host-specific inline config
@@ -694,7 +772,7 @@ git commit -m "feat: add carbon host declaration (N100 Mattermost server)"
       imports =
         (with inputs.self.modules.nixos; [
           common server secrets hardware-n100 disko-nvme
-          tailscale postgres mattermost
+          tailscale postgres mattermost caddy
         ]);
 
       networking.hostName = "carbon";
@@ -751,14 +829,14 @@ build-carbon:
   nix build .#nixosConfigurations.carbon.config.system.build.toplevel
 
 provision host ip:
-  nixos-anywhere --flake .#{{host}} root@{{ip}}
+  nix run nixpkgs#nixos-anywhere -- --flake .#{{host}} root@{{ip}}
 ```
 
 **Step 2:** Commit:
 
 ```bash
 git add -A
-git commit -m "feat: add Justfile with common commands"
+git commit -m "chore: add Justfile with common commands"
 ```
 
 ---
@@ -769,11 +847,11 @@ git commit -m "feat: add Justfile with common commands"
 
 **Step 2:** `nix build .#nixosConfigurations.carbon.config.system.build.toplevel` succeeds.
 
-**Step 3:** Provision target with `nixos-anywhere --flake .#carbon root@<ip>`.
+**Step 3:** Provision target with `nix run nixpkgs#nixos-anywhere -- --flake .#carbon root@<ip>`.
 
 **Step 4:** Generate age key from host SSH key, update `.sops.yaml`, create secrets, redeploy.
 
-**Step 5:** Verify Mattermost at `http://carbon:8065` over Tailscale.
+**Step 5:** Verify Mattermost at `https://mm.lackac.hu` over Tailscale.
 
 **Step 6:** Commit any fixes.
 
