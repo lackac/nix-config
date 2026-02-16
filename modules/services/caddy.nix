@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   flake.modules.nixos.caddy =
     { pkgs, config, ... }:
     {
@@ -13,7 +12,7 @@
         email = "admin@lackac.hu";
         globalConfig = ''
           acme_dns dnsimple {
-            token {$DNSIMPLE_TOKEN}
+            api_access_token {$DNSIMPLE_API_ACCESS_TOKEN}
           }
         '';
         extraConfig = ''
@@ -25,6 +24,10 @@
 
       sops.secrets."dnsimple/token" = { };
 
-      systemd.services.caddy.serviceConfig.EnvironmentFile = config.sops.secrets."dnsimple/token".path;
+      sops.templates."caddy/env".content = ''
+        DNSIMPLE_API_ACCESS_TOKEN=${config.sops.placeholder."dnsimple/token"}
+      '';
+
+      systemd.services.caddy.serviceConfig.EnvironmentFile = config.sops.templates."caddy/env".path;
     };
 }
