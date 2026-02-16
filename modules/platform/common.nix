@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   inherit (config) vars;
 in
@@ -15,7 +15,7 @@ in
       jq ripgrep fd tree rsync just
     ];
 
-    environment.variables.EDITOR = "nvim";
+    environment.variables.EDITOR = lib.mkDefault "nvim";
 
     users.users.${vars.username} = {
       isNormalUser = true;
