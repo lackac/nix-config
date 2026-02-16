@@ -1,0 +1,12 @@
+keys:
+  - &carbon age1PLACEHOLDER_CARBON_KEY
+
+creation_rules:
+  - path_regex: secrets/common\.yaml$
+    key_groups:
+      - age:
+          - *carbon
+  - path_regex: secrets/carbon\.yaml$
+    key_groups:
+      - age:
+          - *carbon
