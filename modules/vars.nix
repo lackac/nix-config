@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   options.vars = {
     username = lib.mkOption {
       type = lib.types.str;
@@ -15,7 +16,7 @@
     sshAuthorizedKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINb0PBMOy7MjJoOJSmlQ2FG4deJJd8Gn8IaE+kDJbMYB lackac@lithium"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINdW8eys/HTknDK+eMcAjeiITC+T7uDGbpaUNydsj7PZ lackac@lithium"
       ];
       description = "SSH public keys authorized across all hosts";
     };
