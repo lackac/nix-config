@@ -1,36 +1,64 @@
-{ config, inputs, ... }: {
-  flake.nixosConfigurations.carbon =
-    inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules =
-        (with inputs.self.modules.nixos; [
-          # Platform bases
-          common
-          server
-          secrets
+{ config, inputs, ... }:
+let
+  targetSystem = "x86_64-linux";
 
-          # Hardware
-          hardware-n100
-          disko-nvme
+  sharedSpecialArgs = {
+    inherit inputs;
+    inherit (config) vars;
+  };
 
-          # Features
-          tailscale
-          postgres
-          mattermost
-          caddy
-        ])
-        ++ [
-          # Host-specific inline config
-          {
-            networking.hostName = "carbon";
-            system.stateVersion = "25.11";
-            sops.defaultSopsFile = ../../secrets/carbon.yaml;
-          }
-        ];
+  carbonAspects = with inputs.self.modules.nixos; [
+    # Platform bases
+    common
+    server
+    secrets
 
-      specialArgs = {
-        inherit inputs;
-        inherit (config) vars;
+    # Hardware
+    hardware-n100
+    disko-nvme
+
+    # Features
+    tailscale
+    postgres
+    mattermost
+    caddy
+  ];
+
+  carbonInline = {
+    networking.hostName = "carbon";
+    system.stateVersion = "25.11";
+    sops.defaultSopsFile = ../../secrets/carbon.yaml;
+  };
+
+  carbonModules = carbonAspects ++ [ carbonInline ];
+
+  colmenaConfig = {
+    meta = {
+      nixpkgs = import inputs.nixpkgs {
+        system = targetSystem;
+      };
+      specialArgs = sharedSpecialArgs;
+    };
+
+    carbon = {
+      imports = carbonModules;
+
+      deployment = {
+        targetHost = "carbon"; # Tailscale hostname
+        targetUser = "root";
+        allowLocalDeployment = false;
       };
     };
+  };
+in
+{
+  flake.nixosConfigurations.carbon = inputs.nixpkgs.lib.nixosSystem {
+    system = targetSystem;
+    modules = carbonModules;
+
+    specialArgs = sharedSpecialArgs;
+  };
+
+  flake.colmena = colmenaConfig;
+  flake.colmenaHive = inputs.colmena.lib.makeHive colmenaConfig;
 }
