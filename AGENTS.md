@@ -10,13 +10,15 @@ Every `.nix` file under `modules/` is a flake-parts module, auto-imported via
 
 - **Pattern:** Dendritic (flake-parts + import-tree). Every file is a
   flake-parts module.
-- **Hosts:** carbon (NixOS/x86_64, N100 server), beryllium (darwin/aarch64, Mac
-  Mini), lithium (darwin/aarch64, MacBook)
+- **Hosts:** carbon (NixOS/x86_64, N100 server), boron (NixOS/x86_64, N100
+  server), beryllium (darwin/aarch64, Mac Mini), lithium (darwin/aarch64,
+  MacBook)
 - **Home-manager:** Minimal - dotfile placement and `home.packages` only. Prefer
   wrapping for complex tools.
 - **Secrets:** sops-nix with age encryption. Keys in `.sops.yaml`, secrets in
   `secrets/`.
-- **Deployment:** Colmena for NixOS, local build for darwin.
+- **Deployment:** Colmena for NixOS (build-on-target by default), local build
+  for darwin.
 - **Nix:** Determinate Nix across all hosts.
 
 ## Build/Test Commands
@@ -24,11 +26,11 @@ Every `.nix` file under `modules/` is a flake-parts module, auto-imported via
 - `just` - List all available commands
 - `just fmt` - Format all Nix files
 - `just check` - Run `nix flake check`
-- `just build-carbon` - Build carbon NixOS config locally
-- `just deploy-carbon` - Deploy to carbon via Colmena
-- `just deploy-all` - Deploy to all NixOS hosts
+- `just build <host>` - Build host profile via Colmena on target
+- `just deploy-dry <host>` - Dry-run deploy via Colmena on target
+- `just deploy <host>` - Apply deploy via Colmena on target
+- `just deploy-all` - Deploy all NixOS hosts via Colmena on target
 - `just provision <host> <ip>` - Initial provisioning via nixos-anywhere
-- `nix flake check` - Validate flake configuration
 
 ## Code Style
 
