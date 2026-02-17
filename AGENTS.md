@@ -42,6 +42,16 @@ Every `.nix` file under `modules/` is a flake-parts module, auto-imported via
 - Nix files define features, not hosts or module types. A file may contribute
   NixOS, darwin, and home-manager modules.
 
+## Commit Message Style
+
+- Follow Conventional Commits.
+- Prefer natural, intent-first summaries over mechanical verbs.
+- Avoid defaulting to "add", "remove", or "update" when a more specific verb
+  explains the change better (for example: "enable", "align", "wire", "route",
+  "consolidate", "harden").
+- Describe why the change matters, not just what file changed.
+- Keep subject lines concise and readable out loud.
+
 ## Module Pattern
 
 Every file follows this pattern, using `flake.modules.<class>.<aspect>` (the
