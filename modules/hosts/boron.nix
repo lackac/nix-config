@@ -20,6 +20,7 @@ let
     # Features
     docker
     mc
+    tailscale
   ];
 
   boronInline = {

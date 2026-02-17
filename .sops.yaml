@@ -1,6 +1,7 @@
 keys:
   - &admin age1epcht3qe6977l3klzdcpqjzr4lrpz7v5tp4cxzfzls8ppm0ptg7syntqqh
   - &carbon age1tampdp59kp5a4q2mz3wmwpvv4xv0p0ez6mndnru8wvc9tv00k4gqsln8v3
+  - &boron age1gmtdsenacykqk36eefgnhaul72ud8a8p5e9d0qn9g9xxhyv30ckqh85lex
 
 creation_rules:
   - path_regex: secrets/common\.yaml$
@@ -8,6 +9,7 @@ creation_rules:
       - age:
         - *admin
         - *carbon
+        - *boron
   - path_regex: secrets/carbon\.yaml$
     key_groups:
       - age:
