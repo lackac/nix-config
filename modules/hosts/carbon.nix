@@ -31,25 +31,6 @@ let
   };
 
   carbonModules = carbonAspects ++ [ carbonInline ];
-
-  colmenaConfig = {
-    meta = {
-      nixpkgs = import inputs.nixpkgs {
-        system = targetSystem;
-      };
-      specialArgs = sharedSpecialArgs;
-    };
-
-    carbon = {
-      imports = carbonModules;
-
-      deployment = {
-        targetHost = "carbon"; # Tailscale hostname
-        targetUser = "root";
-        allowLocalDeployment = false;
-      };
-    };
-  };
 in
 {
   flake.nixosConfigurations.carbon = inputs.nixpkgs.lib.nixosSystem {
@@ -59,6 +40,13 @@ in
     specialArgs = sharedSpecialArgs;
   };
 
-  flake.colmena = colmenaConfig;
-  flake.colmenaHive = inputs.colmena.lib.makeHive colmenaConfig;
+  flake.colmena.carbon = {
+    imports = carbonModules;
+
+    deployment = {
+      targetHost = "carbon"; # Tailscale hostname
+      targetUser = "root";
+      allowLocalDeployment = false;
+    };
+  };
 }
