@@ -13,20 +13,17 @@ up:
 upp input:
   nix flake update {{input}}
 
-deploy-carbon:
-  colmena apply --on carbon
+deploy host:
+  colmena apply --on {{host}} --build-on-target
 
-deploy-boron:
-  colmena apply --on boron --build-on-target
+deploy-dry host:
+  colmena apply dry-activate --on {{host}} --build-on-target
 
 deploy-all:
-  colmena apply
+  colmena apply --build-on-target
 
-build-carbon:
-  nix build .#nixosConfigurations.carbon.config.system.build.toplevel
-
-build-boron:
-  nix build .#nixosConfigurations.boron.config.system.build.toplevel
+build host:
+  colmena apply build --on {{host}} --build-on-target
 
 provision host ip:
   nix run nixpkgs#nixos-anywhere -- --flake .#{{host}} root@{{ip}}
