@@ -6,6 +6,26 @@
 }:
 let
   targetSystem = "x86_64-linux";
+
+  sharedSshOptions = [
+    "-o"
+    "ControlMaster=no"
+    "-o"
+    "ControlPath=none"
+  ];
+
+  effectiveColmena = lib.mapAttrs (
+    name: node:
+    if name == "meta" then
+      node
+    else
+      node
+      // {
+        deployment = (node.deployment or { }) // {
+          sshOptions = (node.deployment.sshOptions or [ ]) ++ sharedSshOptions;
+        };
+      }
+  ) config.flake.colmena;
 in
 {
   options.flake.colmena = lib.mkOption {
@@ -24,5 +44,5 @@ in
     };
   };
 
-  config.flake.colmenaHive = inputs.colmena.lib.makeHive config.flake.colmena;
+  config.flake.colmenaHive = inputs.colmena.lib.makeHive effectiveColmena;
 }
