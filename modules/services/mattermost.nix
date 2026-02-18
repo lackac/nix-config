@@ -54,6 +54,11 @@
             ConsoleLevel = "INFO";
           };
 
+          ImageProxySettings = {
+            Enable = true;
+            ImageProxyType = "local";
+          };
+
           FileSettings = {
             DriverName = "amazons3";
             AmazonS3Bucket = "mattermost";
