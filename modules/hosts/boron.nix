@@ -49,4 +49,6 @@ in
       allowLocalDeployment = false;
     };
   };
+
+  colmenaNodeSystems.boron = targetSystem;
 }
