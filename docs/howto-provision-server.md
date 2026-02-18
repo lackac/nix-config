@@ -56,6 +56,15 @@ nix run nixpkgs#nixos-anywhere -- --flake .#<host> root@<ip>
 
 Note: provisioning is destructive to the target disk.
 
+For installer-style images where SSH starts as `nixos` + password (for example a UTM VM), use `--target-host` and `--env-password`:
+
+```bash
+SSHPASS='<installer-password>' nix run nixpkgs#nixos-anywhere -- \
+  --env-password \
+  --target-host nixos@<ip> \
+  --flake .#<host>
+```
+
 ## 4) First login checks
 
 ```bash
@@ -147,3 +156,30 @@ sudo nixos-rebuild switch --flake <repo-path-or-url>#<host>
 - Secrets missing: verify `/var/lib/sops-nix/key.txt` and decryption recipients in `.sops.yaml`.
 - Boot update failures: check `/boot` free space and mounted ESP.
 - Host mismatch prompt: confirm the expected `networking.hostName` before switching.
+
+## 11) On-demand UTM ARM builder workflow
+
+Use `neon` as an on-demand `aarch64-linux` builder host. Keep the VM powered off by default, then start it only for ARM image builds.
+
+1. Start the UTM VM manually (for example, VM name `neon`) and wait for networking.
+2. Probe remote builder readiness, then build the oxygen SD image:
+
+```bash
+just check-builder
+just build-sd-image-oxygen
+# If DHCP changes the VM IP:
+just check-builder builder=<new-ip>
+just build-sd-image-oxygen builder=<new-ip>
+```
+
+3. Flash the resulting image from `result/sd-image/*.img.zst`.
+4. Shut down the builder VM manually when done.
+
+macOS daemon SSH requirement:
+
+- `nix build --builders ...` uses the local Nix daemon, not your interactive shell user.
+- Ensure the macOS root user can authenticate to the VM over SSH with keys.
+- Ensure the builder host key is trusted for the daemon context as well.
+- If this is missing, builds can fail with `Permission denied (publickey)` even when regular user SSH works.
+
+When provisioning `neon` via installer ISO in UTM, detach the installer ISO before the first reboot after `nixos-anywhere`. If the ISO remains first in boot order, the VM returns to the installer environment and your deployed SSH keys/user are not used.
