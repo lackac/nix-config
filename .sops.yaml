@@ -20,3 +20,7 @@ creation_rules:
       - age:
         - *admin
         - *boron
+  - path_regex: secrets/tofu\.yaml$
+    key_groups:
+      - age:
+        - *admin
