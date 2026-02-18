@@ -45,7 +45,7 @@ in
 
     deployment = {
       targetHost = "carbon"; # Tailscale hostname
-      targetUser = "root";
+      targetUser = "lackac";
       allowLocalDeployment = false;
     };
   };
