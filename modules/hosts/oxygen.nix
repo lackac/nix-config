@@ -13,32 +13,36 @@ let
     secrets
 
     hardware-rpi4
+    (inputs.nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
 
     tailscale
     octoprint
     octoprint-proxy
   ];
 
-  oxygenInline = {
-    networking.hostName = "oxygen";
-    system.stateVersion = "25.11";
-    sops.defaultSopsFile = ../../secrets/oxygen.yaml;
+  oxygenInline =
+    { lib, ... }:
+    {
+      networking.hostName = "oxygen";
+      system.stateVersion = "25.11";
+      sops.defaultSopsFile = ../../secrets/oxygen.yaml;
+      hardware.enableAllHardware = lib.mkForce false;
 
-    fileSystems = {
-      "/" = {
-        device = "/dev/disk/by-label/NIXOS_SD";
-        fsType = "ext4";
-      };
-      "/boot/firmware" = {
-        device = "/dev/disk/by-label/FIRMWARE";
-        fsType = "vfat";
-        options = [
-          "nofail"
-          "noauto"
-        ];
+      fileSystems = {
+        "/" = {
+          device = "/dev/disk/by-label/NIXOS_SD";
+          fsType = "ext4";
+        };
+        "/boot/firmware" = {
+          device = "/dev/disk/by-label/FIRMWARE";
+          fsType = "vfat";
+          options = [
+            "nofail"
+            "noauto"
+          ];
+        };
       };
     };
-  };
 
   oxygenModules = oxygenAspects ++ [ oxygenInline ];
 in

@@ -17,6 +17,7 @@
       type = lib.types.listOf lib.types.str;
       default = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINdW8eys/HTknDK+eMcAjeiITC+T7uDGbpaUNydsj7PZ lackac@lithium"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHaQrG9nHmEMUPjd+Z3WMno7qV/QH0wA5K6hPeqDbOwx root@lithium"
       ];
       description = "SSH public keys authorized across all hosts";
     };
