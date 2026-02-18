@@ -15,3 +15,8 @@ creation_rules:
       - age:
         - *admin
         - *carbon
+  - path_regex: secrets/boron\.yaml$
+    key_groups:
+      - age:
+        - *admin
+        - *boron
