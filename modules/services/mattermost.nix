@@ -1,8 +1,30 @@
 { ... }:
 {
   flake.modules.nixos.mattermost =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
+      sops.secrets."minio/mattermostAccessKey" = {
+        sopsFile = ../../secrets/carbon.yaml;
+        owner = "mattermost";
+        group = "mattermost";
+      };
+
+      sops.secrets."minio/mattermostSecretKey" = {
+        sopsFile = ../../secrets/carbon.yaml;
+        owner = "mattermost";
+        group = "mattermost";
+      };
+
+      sops.templates."mattermost/env" = {
+        owner = "mattermost";
+        group = "mattermost";
+        mode = "0400";
+        content = ''
+          MM_FILESETTINGS_AMAZONS3ACCESSKEYID=${config.sops.placeholder."minio/mattermostAccessKey"}
+          MM_FILESETTINGS_AMAZONS3SECRETACCESSKEY=${config.sops.placeholder."minio/mattermostSecretKey"}
+        '';
+      };
+
       services.mattermost = {
         enable = true;
         package = pkgs.mattermostLatest;
@@ -10,6 +32,7 @@
         port = 8065;
         host = "127.0.0.1";
         mutableConfig = false;
+        environmentFile = config.sops.templates."mattermost/env".path;
 
         settings = {
           ServiceSettings = {
@@ -29,6 +52,14 @@
 
           LogSettings = {
             ConsoleLevel = "INFO";
+          };
+
+          FileSettings = {
+            DriverName = "amazons3";
+            AmazonS3Bucket = "mattermost";
+            AmazonS3Region = "us-east-1";
+            AmazonS3Endpoint = "boron.at-larch.ts.net:9000";
+            AmazonS3SSL = true;
           };
 
           EmailSettings = {
