@@ -1,21 +1,30 @@
-{ inputs, ... }: {
-  flake.modules.nixos.hardware-n100 = { lib, modulesPath, ... }: {
-    imports = [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      inputs.nixos-hardware.nixosModules.common-cpu-intel
-      inputs.nixos-hardware.nixosModules.common-pc-ssd
-    ];
+{ inputs, ... }:
+{
+  flake.modules.nixos.hardware-n100 =
+    { lib, modulesPath, ... }:
+    {
+      imports = [
+        (modulesPath + "/installer/scan/not-detected.nix")
+        inputs.nixos-hardware.nixosModules.common-cpu-intel
+        inputs.nixos-hardware.nixosModules.common-pc-ssd
+      ];
 
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
 
-    boot.initrd.availableKernelModules = [
-      "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "sdhci_pci"
-    ];
-    boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-intel" ];
-    boot.extraModulePackages = [ ];
+      boot.initrd.availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+        "sdhci_pci"
+      ];
+      boot.initrd.kernelModules = [ ];
+      boot.kernelModules = [ "kvm-intel" ];
+      boot.extraModulePackages = [ ];
 
-    networking.useDHCP = lib.mkDefault true;
-  };
+      networking.useDHCP = lib.mkDefault true;
+    };
 }
