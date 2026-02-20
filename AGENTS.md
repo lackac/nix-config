@@ -4,7 +4,9 @@
 
 This is a dendritic Nix flake managing all personal hosts (macOS and NixOS).
 Every `.nix` file under `modules/` is a flake-parts module, auto-imported via
-`import-tree`. See `docs/plans/` for implementation plans.
+`import-tree`. Plans start as drafts in `.opencode/plans/` (gitignored) during
+brainstorming and iteration. Before execution, finalized plans move to
+`docs/plans/` where they are committed as permanent architectural records.
 
 ## Architecture
 
