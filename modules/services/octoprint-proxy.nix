@@ -19,7 +19,7 @@
         extraConfig = ''
           op.lackac.hu {
             handle_path /webcam/* {
-              reverse_proxy 127.0.0.1:8080
+              reverse_proxy 127.0.0.1:1984
             }
 
             handle {
