@@ -32,6 +32,13 @@ let
         raspberry-pi-4.display-vc4
       ];
 
+      nixpkgs.overlays = [
+        (final: prev: {
+          raspberrypi-utils = prev.rpi.raspberrypi-utils;
+          raspberrypi-udev-rules = prev.rpi.raspberrypi-udev-rules;
+        })
+      ];
+
       networking.hostName = "oxygen";
       system.stateVersion = "25.11";
       sops.defaultSopsFile = ../../secrets/oxygen.yaml;
@@ -59,8 +66,8 @@ let
         content = ''
           psk_home=${config.sops.placeholder."wifi/psk"}
         '';
-        owner = "root";
-        group = "root";
+        owner = "wpa_supplicant";
+        group = "wpa_supplicant";
         mode = "0400";
       };
 
@@ -88,7 +95,15 @@ let
       };
     };
 
-  oxygenModules = oxygenAspects ++ [ oxygenInline ];
+  oxygenModules = [
+    {
+      disabledModules = [
+        "rename.nix"
+      ];
+    }
+  ]
+  ++ oxygenAspects
+  ++ [ oxygenInline ];
 in
 {
   flake.nixosConfigurations.oxygen = inputs.nixos-raspberrypi.lib.nixosSystem {
