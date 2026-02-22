@@ -20,7 +20,8 @@ creation_rules:
       - age:
         - *admin
         - *boron
-  - path_regex: secrets/tofu\.yaml$
+  - path_regex: secrets/lithium\.yaml$
     key_groups:
       - age:
         - *admin
+

@@ -20,7 +20,8 @@ let
     # Features
     docker
     mc
-    minio
+    garage
+    caddy
     tailscale
   ];
 

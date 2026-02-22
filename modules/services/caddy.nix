@@ -22,7 +22,9 @@ _: {
         '';
       };
 
-      sops.secrets."dnsimple/token" = { };
+      sops.secrets."dnsimple/token" = {
+        sopsFile = ../../secrets/common.yaml;
+      };
 
       sops.templates."caddy/env".content = ''
         DNSIMPLE_API_ACCESS_TOKEN=${config.sops.placeholder."dnsimple/token"}
