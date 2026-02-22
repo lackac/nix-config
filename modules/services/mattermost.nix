@@ -3,13 +3,13 @@
   flake.modules.nixos.mattermost =
     { config, pkgs, ... }:
     {
-      sops.secrets."minio/mattermostAccessKey" = {
+      sops.secrets."garage/mattermostAccessKey" = {
         sopsFile = ../../secrets/carbon.yaml;
         owner = "mattermost";
         group = "mattermost";
       };
 
-      sops.secrets."minio/mattermostSecretKey" = {
+      sops.secrets."garage/mattermostSecretKey" = {
         sopsFile = ../../secrets/carbon.yaml;
         owner = "mattermost";
         group = "mattermost";
@@ -20,8 +20,8 @@
         group = "mattermost";
         mode = "0400";
         content = ''
-          MM_FILESETTINGS_AMAZONS3ACCESSKEYID=${config.sops.placeholder."minio/mattermostAccessKey"}
-          MM_FILESETTINGS_AMAZONS3SECRETACCESSKEY=${config.sops.placeholder."minio/mattermostSecretKey"}
+          MM_FILESETTINGS_AMAZONS3ACCESSKEYID=${config.sops.placeholder."garage/mattermostAccessKey"}
+          MM_FILESETTINGS_AMAZONS3SECRETACCESSKEY=${config.sops.placeholder."garage/mattermostSecretKey"}
         '';
       };
 
@@ -62,8 +62,8 @@
           FileSettings = {
             DriverName = "amazons3";
             AmazonS3Bucket = "mattermost";
-            AmazonS3Region = "us-east-1";
-            AmazonS3Endpoint = "boron.at-larch.ts.net:9000";
+            AmazonS3Region = "garage";
+            AmazonS3Endpoint = "s3.lackac.hu";
             AmazonS3SSL = true;
           };
 

@@ -28,11 +28,3 @@ build host:
 provision host ip:
   nix run nixpkgs#nixos-anywhere -- --flake .#{{host}} root@{{ip}}
 
-tofu-init stack:
-  ./scripts/tofu-env.sh {{stack}} -- tofu -chdir=infra/{{stack}} init -reconfigure
-
-tofu-plan stack:
-  ./scripts/tofu-env.sh {{stack}} -- tofu -chdir=infra/{{stack}} plan
-
-tofu-apply stack:
-  ./scripts/tofu-env.sh {{stack}} -- tofu -chdir=infra/{{stack}} apply
