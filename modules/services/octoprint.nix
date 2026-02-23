@@ -1,7 +1,12 @@
 { ... }:
 {
   flake.modules.nixos.octoprint =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       rpicam-apps = pkgs.rpi.rpicam-apps.override {
         withDrmPreview = false;
@@ -82,6 +87,21 @@
 
           };
       };
+
+      octoprint-notify = pkgs.writeShellApplication {
+        name = "octoprint-notify";
+        runtimeInputs = with pkgs; [
+          awscli2
+          curl
+          jq
+          yq-go
+        ];
+        text = ''
+          export WEBHOOK_URL_FILE="/run/secrets/mattermost/webhookUrl"
+          export AWS_SHARED_CREDENTIALS_FILE="${config.sops.templates."octoprint/aws-credentials".path}"
+          exec ${../../scripts/octoprint-notify.sh} "$@"
+        '';
+      };
     in
     {
       services.octoprint = {
@@ -99,6 +119,12 @@
             marlingcodedocumentation
           ];
         extraConfig = {
+          server = {
+            onlineCheck.enabled = false;
+            pluginBlacklist.enabled = false;
+            # Trust Tailscale network for the "public access" IP check
+            ipCheck.trustedSubnets = [ "100.64.0.0/10" ];
+          };
           serial = {
             autoconnect = true;
             port = "/dev/serial/by-id/usb-Prusa_Research__prusa3d.com__Original_Prusa_i3_MK3_CZPX1420X004XK79619-if00";
@@ -107,6 +133,12 @@
             stream = "/webcam/api/stream.mjpeg?src=printer";
             snapshot = "/webcam/api/frame.jpeg?src=printer";
             ffmpeg = "${pkgs.ffmpeg-headless}/bin/ffmpeg";
+            timelapse = {
+              type = "timed";
+              fps = 25;
+              postRoll = 3;
+              options.interval = 10;
+            };
           };
           plugins = {
             announcements = {
@@ -157,6 +189,8 @@
             };
             classicwebcam = {
               _config_version = 1;
+              flipH = true;
+              flipV = true;
               stream = "/webcam/api/stream.mjpeg?src=printer";
               snapshot = "/webcam/api/frame.jpeg?src=printer";
             };
@@ -167,6 +201,40 @@
             resource_monitor = {
               _config_version = 2;
             };
+            # Nix manages all packages; disable pip-based plugin/update systems
+            _disabled = [
+              "pluginmanager"
+              "softwareupdate"
+            ];
+          };
+          events = {
+            enabled = true;
+            subscriptions = [
+              {
+                event = "PrintStarted";
+                command = "${octoprint-notify}/bin/octoprint-notify PrintStarted {name}";
+                type = "system";
+                shell = false;
+              }
+              {
+                event = "PrintDone";
+                command = "${octoprint-notify}/bin/octoprint-notify PrintDone {name} {time}";
+                type = "system";
+                shell = false;
+              }
+              {
+                event = "PrintFailed";
+                command = "${octoprint-notify}/bin/octoprint-notify PrintFailed {name} {reason}";
+                type = "system";
+                shell = false;
+              }
+              {
+                event = "MovieDone";
+                command = "${octoprint-notify}/bin/octoprint-notify MovieDone {movie} {movie_basename} {gcode}";
+                type = "system";
+                shell = false;
+              }
+            ];
           };
         };
       };
@@ -179,11 +247,38 @@
       environment.systemPackages = [
         rpicam-apps
         pkgs.rpi.libcamera
+        octoprint-notify
       ];
 
       users.users.octoprint.extraGroups = [
         "dialout"
         "video"
       ];
+
+      sops.secrets."garage/octoprintAccessKey" = {
+        owner = "octoprint";
+        group = "octoprint";
+      };
+
+      sops.secrets."garage/octoprintSecretKey" = {
+        owner = "octoprint";
+        group = "octoprint";
+      };
+
+      sops.secrets."mattermost/webhookUrl" = {
+        owner = "octoprint";
+        group = "octoprint";
+      };
+
+      sops.templates."octoprint/aws-credentials" = {
+        owner = "octoprint";
+        group = "octoprint";
+        mode = "0400";
+        content = ''
+          [default]
+          aws_access_key_id=${config.sops.placeholder."garage/octoprintAccessKey"}
+          aws_secret_access_key=${config.sops.placeholder."garage/octoprintSecretKey"}
+        '';
+      };
     };
 }

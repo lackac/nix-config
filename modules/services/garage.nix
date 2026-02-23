@@ -26,6 +26,11 @@
             root_domain = ".s3.garage.localhost";
           };
 
+          s3_web = {
+            bind_addr = "[::]:3902";
+            root_domain = ".web.garage.localhost";
+          };
+
           admin = {
             api_bind_addr = "127.0.0.1:3903";
           };
@@ -45,10 +50,13 @@
         GARAGE_ADMIN_TOKEN=${config.sops.placeholder."garage/adminToken"}
       '';
 
-      # Caddy reverse proxy for S3 API
+      # Caddy reverse proxy for S3 API and website endpoint
       services.caddy.extraConfig = ''
         s3.lackac.hu {
           reverse_proxy localhost:3900
+        }
+        octoprint.s3.lackac.hu {
+          reverse_proxy localhost:3902
         }
       '';
     };
