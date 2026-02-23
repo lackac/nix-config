@@ -1,7 +1,7 @@
 keys:
   - &admin age1epcht3qe6977l3klzdcpqjzr4lrpz7v5tp4cxzfzls8ppm0ptg7syntqqh
-  - &carbon age1tampdp59kp5a4q2mz3wmwpvv4xv0p0ez6mndnru8wvc9tv00k4gqsln8v3
   - &boron age1gmtdsenacykqk36eefgnhaul72ud8a8p5e9d0qn9g9xxhyv30ckqh85lex
+  - &carbon age1tampdp59kp5a4q2mz3wmwpvv4xv0p0ez6mndnru8wvc9tv00k4gqsln8v3
   - &oxygen age1zlmelu5wtfeqvryl8ff7zkwvdwez435cyppxmm58q7k9pxylj3asttpls5
 
 creation_rules:
@@ -9,8 +9,8 @@ creation_rules:
     key_groups:
       - age:
         - *admin
-        - *carbon
         - *boron
+        - *carbon
         - *oxygen
   - path_regex: secrets/carbon\.yaml$
     key_groups:
