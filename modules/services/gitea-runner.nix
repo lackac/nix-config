@@ -13,6 +13,18 @@
         url = "https://git.lackac.hu";
         tokenFile = config.sops.templates."gitea-actions-runner/token.env".path;
 
+        hostPackages = with pkgs; [
+          bash
+          coreutils
+          curl
+          gawk
+          gitMinimal
+          gnused
+          nodejs
+          wget
+          nix
+        ];
+
         labels = [
           "${system}:host"
           "${hostName}:host"

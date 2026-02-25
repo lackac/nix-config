@@ -21,6 +21,7 @@
 
           # Utilities
           git
+          tea
           just
           opentofu
           pwgen
