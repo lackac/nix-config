@@ -13,6 +13,7 @@ let
     disable-hotkeys
     fonts
     homebrew
+    home
   ];
 
   lithiumInline = {
