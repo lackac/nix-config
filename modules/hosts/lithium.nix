@@ -9,6 +9,8 @@ let
 
   lithiumAspects = with inputs.self.modules.darwin; [
     common
+    desktop
+    disable-hotkeys
   ];
 
   lithiumInline = {
