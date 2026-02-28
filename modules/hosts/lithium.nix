@@ -11,6 +11,8 @@ let
     common
     desktop
     disable-hotkeys
+    fonts
+    homebrew
   ];
 
   lithiumInline = {
