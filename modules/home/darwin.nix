@@ -1,6 +1,7 @@
 { config, inputs, ... }:
 let
   inherit (config) vars;
+  hmModules = inputs.self.modules.homeManager;
 in
 {
   flake.modules.darwin.home =
@@ -20,7 +21,11 @@ in
         users.${vars.username} =
           { ... }:
           {
-            imports = builtins.attrValues (inputs.self.modules.homeManager or { });
+            imports = [
+              hmModules.shell
+              hmModules.cli-tools
+              hmModules.tools
+            ];
 
             home = {
               username = vars.username;
