@@ -4,6 +4,7 @@
     { config, pkgs, ... }:
     let
       localBin = "${config.home.homeDirectory}/.local/bin";
+      homebrewFallbackPath = "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin";
 
       isDarwin = pkgs.stdenv.isDarwin;
     in
@@ -38,7 +39,7 @@
         enable = true;
         enableCompletion = true;
         bashrcExtra = ''
-          export PATH="$PATH:${localBin}"
+          export PATH="$PATH:${localBin}${if isDarwin then ":${homebrewFallbackPath}" else ""}"
         '';
       };
 
@@ -59,9 +60,6 @@
           ${
             if isDarwin then
               ''
-                # Homebrew PATH
-                export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
-
                 # XDG runtime directory
                 export XDG_RUNTIME_DIR="$HOME/Library/Caches/TemporaryItems/runtime"
                 mkdir -p -m 700 "$XDG_RUNTIME_DIR"
@@ -70,7 +68,7 @@
               ""
           }
 
-          export PATH="$PATH:${localBin}"
+          export PATH="$PATH:${localBin}${if isDarwin then ":${homebrewFallbackPath}" else ""}"
         '';
       };
 
