@@ -12,6 +12,7 @@ in
         bat
         eza
         fzf
+        git
         tealdeer
         yazi
         zoxide
