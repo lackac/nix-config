@@ -27,6 +27,27 @@
 
       programs.git = {
         enable = true;
+        ignores = [
+          ".DS_Store"
+          "*.orig"
+          "*.rej"
+          "*~"
+          "*.swp"
+          ".#*"
+          "*.o"
+          ".envrc"
+          ".direnv/"
+          ".bundle"
+          "vendor/ruby/"
+          ".irbrc"
+          ".pryrc"
+          "tags"
+          ".tags"
+          ".tags[0-9]"
+          "devlog.md"
+          ".private-journal"
+        ];
+
         settings = {
           user = {
             name = vars.fullName;
