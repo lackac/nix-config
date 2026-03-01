@@ -27,27 +27,29 @@
 
       programs.git = {
         enable = true;
-        userName = vars.fullName;
-        userEmail = vars.email;
+        settings = {
+          user = {
+            name = vars.fullName;
+            email = vars.email;
+            signingkey = "~/.ssh/git-signing.pub";
+          };
 
-        aliases = {
-          br = "branch";
-          co = "checkout";
-          st = "status";
-          dc = "diff --cached";
-          update = "pull --rebase --autostash";
-          foreach = "submodule foreach";
-          start = "!git init && git commit --allow-empty -m \"chore: inception\"";
-          human = "name-rev --name-only --refs=refs/heads/*";
-          humin = "name-rev --refs=refs/heads/* --stdin";
-          ls = "log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate";
-          ll = "log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate --numstat";
-          conflicts = "diff --name-only --diff-filter=U";
-          resolve = "!git ls-files --unmerged | cut -c51- | sort -u | xargs git add";
-        };
+          alias = {
+            br = "branch";
+            co = "checkout";
+            st = "status";
+            dc = "diff --cached";
+            update = "pull --rebase --autostash";
+            foreach = "submodule foreach";
+            start = "!git init && git commit --allow-empty -m \"chore: inception\"";
+            human = "name-rev --name-only --refs=refs/heads/*";
+            humin = "name-rev --refs=refs/heads/* --stdin";
+            ls = "log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate";
+            ll = "log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate --numstat";
+            conflicts = "diff --name-only --diff-filter=U";
+            resolve = "!git ls-files --unmerged | cut -c51- | sort -u | xargs git add";
+          };
 
-        extraConfig = {
-          user.signingkey = "~/.ssh/git-signing.pub";
           url."ssh://git@github.com/".insteadOf = "https://github.com/";
 
           gpg.format = "ssh";
