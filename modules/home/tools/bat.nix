@@ -10,5 +10,9 @@
           style = "plain";
         };
       };
+
+      home.shellAliases = {
+        batw = "bat --wrap=character";
+      };
     };
 }

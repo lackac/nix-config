@@ -9,18 +9,17 @@
     in
     {
       home.shellAliases = {
-        l = "eza -l";
-        lk = "eza -l --sort=size";
-        lm = "eza -l --sort=modified";
-        lc = "eza -l --sort=changed";
-        lu = "eza -l --sort=accessed";
-
+        nix = "noglob nix";
         psg = "ps aux | grep";
         mwget = "wget -v -c -x -r -l 0 -L -np";
+
+        oc = "opencode";
 
         cal = "gcal -s1 -H '\\e[44;37m:\\e[0m:\\e[42;37m:\\e[0m'";
         cal-hu = "cal -qHU";
         cal-en = "cal -qGB_EN";
+        cal-gb = "cal-en";
+        cal-uk = "cal-en";
 
         b = "bundle";
         bi = "b install";
