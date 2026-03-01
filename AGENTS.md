@@ -4,9 +4,9 @@
 
 This is a dendritic Nix flake managing all personal hosts (macOS and NixOS).
 Every `.nix` file under `modules/` is a flake-parts module, auto-imported via
-`import-tree`. Plans start as drafts in `.opencode/plans/` (gitignored) during
-brainstorming and iteration. Before execution, finalized plans move to
-`docs/plans/` where they are committed as permanent architectural records.
+`import-tree`. Plans live as drafts in `.opencode/plans/` (gitignored) during
+brainstorming and execution. Long-lived operational guidance belongs in
+`README.md` and focused docs under `docs/`.
 
 ## Architecture
 
@@ -15,8 +15,8 @@ brainstorming and iteration. Before execution, finalized plans move to
 - **Hosts:** carbon (NixOS/x86_64, N100 server), boron (NixOS/x86_64, N100
   server), beryllium (darwin/aarch64, Mac Mini), lithium (darwin/aarch64,
   MacBook)
-- **Home-manager:** Minimal - dotfile placement and `home.packages` only. Prefer
-  wrapping for complex tools.
+- **Home-manager:** Primary user-level shell and tool configuration via
+  `programs.*` and `home.packages`.
 - **Secrets:** sops-nix with age encryption. Keys in `.sops.yaml`, secrets in
   `secrets/`.
 - **Deployment:** Colmena for NixOS (build-on-target by default), local build
