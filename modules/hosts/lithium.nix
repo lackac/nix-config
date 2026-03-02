@@ -12,6 +12,7 @@ let
     desktop
     disable-hotkeys
     fonts
+    hammerspoon
     homebrew
     home
   ];
