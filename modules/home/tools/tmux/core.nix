@@ -55,6 +55,7 @@
 
           unbind s
           bind C-e switch-client -l
+          bind C-a send-prefix
 
           unbind c
           bind c command-prompt "new-window -n '%%'"
