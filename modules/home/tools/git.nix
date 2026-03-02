@@ -128,7 +128,7 @@
           };
 
           git.autoFetch = false;
-          confirmOnQuit = true;
+          confirmOnQuit = false;
         };
       };
     };
