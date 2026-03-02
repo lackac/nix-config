@@ -10,6 +10,7 @@ in
         starship
         atuin
         bat
+        direnv
         eza
         fzf
         git
