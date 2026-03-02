@@ -9,6 +9,7 @@ in
       system.primaryUser = vars.username;
 
       security.pam.services.sudo_local.touchIdAuth = true;
+      security.pam.services.sudo_local.reattach = true;
 
       time.timeZone = "Europe/Budapest";
 
