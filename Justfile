@@ -2,7 +2,7 @@ default:
   @just --list
 
 fmt:
-  nix fmt .
+  nix fmt
 
 check:
   nix flake check

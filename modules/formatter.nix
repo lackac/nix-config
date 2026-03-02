@@ -1,8 +1,11 @@
 { ... }:
 {
   perSystem =
-    { pkgs, ... }:
+    { ... }:
     {
-      formatter = pkgs.nixfmt;
+      treefmt = {
+        projectRootFile = "flake.nix";
+        programs.nixfmt.enable = true;
+      };
     };
 }
