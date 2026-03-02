@@ -67,6 +67,8 @@
 
           unbind f
           bind f popup -E
+          unbind l
+          bind l popup -E lazygit
 
           unbind m
           bind m command-prompt -p "man" "split-window -h 'exec man %%'"
