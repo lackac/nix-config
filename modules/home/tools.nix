@@ -13,6 +13,7 @@ in
         eza
         fzf
         git
+        tmux
         tealdeer
         yazi
         zoxide
