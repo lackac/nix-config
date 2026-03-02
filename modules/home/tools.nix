@@ -14,6 +14,7 @@ in
         eza
         fzf
         git
+        neovim
         tmux
         tealdeer
         yazi
