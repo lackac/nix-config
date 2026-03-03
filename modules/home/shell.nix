@@ -31,7 +31,7 @@
       };
 
       home.sessionVariables = {
-        LESS = "-F -g -i -M -R -S -w -X -z-4";
+        LESS = "-F -g -i -M -R -S -w -X";
         PAGER = "less";
         JQ_COLORS = "2;35:0;31:0;32:0;33:0;36:0;34:0;34:1;34";
       };
