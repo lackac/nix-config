@@ -11,6 +11,7 @@ in
         tmux-statusline
         tmux-sesh
         tmux-opencode-session
+        tmux-session-rename
         tmux-autostart
       ];
     };
