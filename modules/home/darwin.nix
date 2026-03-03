@@ -24,6 +24,7 @@ in
             imports = [
               hmModules.shell
               hmModules.cli-tools
+              hmModules.apps
               hmModules.hammerspoon
               hmModules.tools
             ];

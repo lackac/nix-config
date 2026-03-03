@@ -8,6 +8,9 @@
         config = {
           pager = "less -FR";
           style = "plain";
+          theme = "auto";
+          "theme-light" = "Solarized (light)";
+          "theme-dark" = "Solarized (dark)";
         };
       };
 
