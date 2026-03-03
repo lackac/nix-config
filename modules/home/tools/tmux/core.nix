@@ -68,6 +68,7 @@
 
           unbind f
           bind f popup -E
+          bind k popup -E -w 80% -h 70% -d "#{pane_current_path}" "selected=\$(sesh list -t -c -d -H | fzf --no-sort --prompt='🪟  '); [ -n \"\$selected\" ] && sesh connect \"\$selected\""
           unbind l
           bind l popup -E -w 80% -h 80% lazygit
           bind g split-window -h -b -p 62 -c "#{pane_current_path}" lazygit
