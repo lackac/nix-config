@@ -45,6 +45,9 @@ brainstorming and execution. Long-lived operational guidance belongs in
 - Naming: kebab-case for file and attribute names, camelCase for functions
 - Nix files define features, not hosts or module types. A file may contribute
   NixOS, darwin, and home-manager modules.
+- For shell helper scripts longer than ~15 lines, keep script content in a
+  separate `.sh` file and reference it from Nix (for example with
+  `builtins.readFile`).
 
 ## Commit Message Style
 
