@@ -677,11 +677,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1772489176,
-        "narHash": "sha256-mePT3bEAKrNrSDZ403/26cbXpehNAf2efTGHQTbmDJA=",
+        "lastModified": 1772564578,
+        "narHash": "sha256-q2CaPyW7T1pLGPaE/ELqLnNnwIyuKDQoM+LMQaE/xRM=",
         "owner": "lackac",
         "repo": "nvf-config",
-        "rev": "0d6728b1beb7a8c85d40d071891d1b42cc86f50b",
+        "rev": "4f20504314fcf4519aef3ea30d50b8e0b13db4b4",
         "type": "github"
       },
       "original": {
