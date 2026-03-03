@@ -10,6 +10,7 @@ in
         tmux-core
         tmux-statusline
         tmux-sesh
+        tmux-opencode-session
         tmux-autostart
       ];
     };
