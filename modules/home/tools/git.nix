@@ -104,6 +104,7 @@
             diff-so-fancy = true;
             line-numbers = true;
             true-color = "always";
+            detect-dark-light = "auto";
           };
 
           diff = {

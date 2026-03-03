@@ -46,7 +46,6 @@ in
           "google-drive"
           "hammerspoon"
           "jordanbaird-ice"
-          "kitty"
           "mattermost"
           "microsoft-teams"
           "obsidian"
