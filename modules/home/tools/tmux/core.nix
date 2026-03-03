@@ -69,8 +69,9 @@
           unbind f
           bind f popup -E
           unbind l
-          bind l popup -E lazygit
-
+          bind l popup -E -w 80% -h 80% lazygit
+          bind g split-window -h -b -p 62 -c "#{pane_current_path}" lazygit
+          bind v split-window -h -b -p 62 -c "#{pane_current_path}" nvim
           unbind m
           bind m command-prompt -p "man" "split-window -h 'exec man %%'"
           unbind %
