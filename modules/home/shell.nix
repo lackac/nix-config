@@ -12,6 +12,7 @@
     {
       home.shellAliases = {
         nix = "noglob nix";
+        nvf = "nix run ~/Code/lackac/nvf-config";
         psg = "ps aux | grep";
         mwget = "wget -v -c -x -r -l 0 -L -np";
 
