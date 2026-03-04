@@ -81,6 +81,11 @@
       url = "github:lackac/nvf-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    oc-config = {
+      url = "github:lackac/oc-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
