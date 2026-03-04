@@ -9,19 +9,19 @@ opencode_args=()
 
 while (($# > 0)); do
   case "$1" in
-    --print-port)
-      print_only=true
-      shift
-      ;;
-    --)
-      shift
-      opencode_args+=("$@")
-      break
-      ;;
-    *)
-      opencode_args+=("$1")
-      shift
-      ;;
+  --print-port)
+    print_only=true
+    shift
+    ;;
+  --)
+    shift
+    opencode_args+=("$@")
+    break
+    ;;
+  *)
+    opencode_args+=("$1")
+    shift
+    ;;
   esac
 done
 
@@ -85,4 +85,4 @@ if [[ -n "${TMUX:-}" ]]; then
   fi
 fi
 
-exec opencode --port "$OPENCODE_PORT" "${opencode_args[@]}"
+exec oh-my-opencode --port "$OPENCODE_PORT" "${opencode_args[@]}"
