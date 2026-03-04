@@ -15,6 +15,7 @@ in
         fzf
         git
         neovim
+        opencode
         tmux
         tealdeer
         yazi
