@@ -18,7 +18,7 @@
             {
               name = "main";
               path = "~";
-              startup_command = "tmux rename-window '󰞷'; tmux new-window -n '' 'btop'; tmux select-window -t '󰞷'; clear";
+              startup_command = "tmux rename-window '󰞷'; clear";
             }
           ];
         };
