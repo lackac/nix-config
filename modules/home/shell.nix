@@ -13,6 +13,8 @@
       home.shellAliases = {
         nix = "noglob nix";
         nvf = "nix run ~/Code/lackac/nvf-config";
+        dr = "direnv reload";
+        tat = "tmux attach";
         psg = "ps aux | grep";
         mwget = "wget -v -c -x -r -l 0 -L -np";
 
