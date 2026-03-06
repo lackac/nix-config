@@ -26,6 +26,7 @@ in
               hmModules.cli-tools
               hmModules.apps
               hmModules.hammerspoon
+              hmModules.syncthing
               hmModules.tools
             ];
 
