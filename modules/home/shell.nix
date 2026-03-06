@@ -74,6 +74,35 @@
         '';
       };
 
+      editorconfig = {
+        enable = true;
+        settings = {
+          "*" = {
+            end_of_line = "lf";
+            indent_style = "space";
+            indent_size = 2;
+            trim_trailing_whitespace = true;
+            insert_final_newline = true;
+          };
+        };
+      };
+
+      programs.readline = {
+        enable = true;
+        variables = {
+          meta-flag = true;
+          input-meta = true;
+          output-meta = true;
+          convert-meta = false;
+          completion-ignore-case = true;
+        };
+        bindings = {
+          "\\e[3~" = "delete-char";
+          "TAB" = "menu-complete";
+          "\\e[Z" = "\"\\M--1\\t\"";
+        };
+      };
+
       xdg = {
         enable = true;
         cacheHome =
