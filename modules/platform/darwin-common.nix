@@ -37,6 +37,8 @@ in
         tree
         rsync
         just
+        ruby
+        python3
       ];
 
       environment.variables.EDITOR = "nvim";
