@@ -16,6 +16,7 @@ let
     hammerspoon
     homebrew
     home
+    onePassword
   ];
 
   lithiumInline = {
