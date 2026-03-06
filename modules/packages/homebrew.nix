@@ -36,8 +36,6 @@ in
         ];
 
         casks = [
-          "1password"
-          "1password-cli"
           "autodesk-fusion"
           "brave-browser"
           "chatgpt"

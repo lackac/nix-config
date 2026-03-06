@@ -5,8 +5,6 @@
     let
       localBin = "${config.home.homeDirectory}/.local/bin";
       homebrewFallbackPath = "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin";
-      opPluginsPath = "${config.xdg.configHome}/op/plugins.sh";
-
       isDarwin = pkgs.stdenv.isDarwin;
     in
     {
@@ -44,10 +42,6 @@
         enableCompletion = true;
         bashrcExtra = ''
           export PATH="$PATH:${localBin}${if isDarwin then ":${homebrewFallbackPath}" else ""}"
-
-          if [ -f "${opPluginsPath}" ]; then
-            source "${opPluginsPath}"
-          fi
         '';
       };
 
@@ -77,10 +71,6 @@
           }
 
           export PATH="$PATH:${localBin}${if isDarwin then ":${homebrewFallbackPath}" else ""}"
-
-          if [ -f "${opPluginsPath}" ]; then
-            source "${opPluginsPath}"
-          fi
         '';
       };
 
