@@ -27,6 +27,9 @@
 
       programs.git = {
         enable = true;
+        includes = [
+          { path = "~/.config/git/local"; }
+        ];
         ignores = [
           ".DS_Store"
           "*.orig"
