@@ -16,6 +16,7 @@ in
         git
         neovim
         opencode
+        ssh
         tmux
         tealdeer
         yazi
