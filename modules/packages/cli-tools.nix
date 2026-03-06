@@ -4,6 +4,7 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
+        btop
         doggo
         duf
         gdu
@@ -15,18 +16,26 @@
         sad
         yq-go
 
-        btop
-
-        gcal
         gnupg
         gnumake
+
+        bc
+        gcal
+        ipcalc
+        units
+        watch
 
         nix-output-monitor
         nix-init
         nix-melt
         nix-tree
 
+        imagemagick
+        pngpaste
+
+        awscli2
         croc
+        hunspell
       ];
     };
 }
