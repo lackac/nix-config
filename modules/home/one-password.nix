@@ -20,12 +20,13 @@ in
     }:
     let
       opAgentSock = "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+      opAgentSockSsh = lib.replaceStrings [ " " ] [ "\\ " ] opAgentSock;
       opPluginsPath = "${config.xdg.configHome}/op/plugins.sh";
     in
     {
       home.sessionVariables.SSH_AUTH_SOCK = opAgentSock;
 
-      programs.ssh.matchBlocks."*".identityAgent = opAgentSock;
+      programs.ssh.matchBlocks."*".identityAgent = opAgentSockSsh;
 
       programs.bash.bashrcExtra = lib.mkAfter ''
         if [ -f "${opPluginsPath}" ]; then
