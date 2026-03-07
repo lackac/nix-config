@@ -774,11 +774,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1772703007,
-        "narHash": "sha256-/C7j1QELs7Rm0oM86sj6YThsDWHXVfSxpjU5ncWMPhc=",
+        "lastModified": 1772874497,
+        "narHash": "sha256-bXgRpwx9LOpR7vGt3QOYexV33Q0MBtGZRtdzF1XBYv0=",
         "owner": "lackac",
         "repo": "oc-config",
-        "rev": "f5eefa9ee6f1b101f9bc7509433b9767fb85079e",
+        "rev": "264305c9715b6eaa2565447e0724e2e49c376ce4",
         "type": "github"
       },
       "original": {
@@ -812,11 +812,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772665925,
-        "narHash": "sha256-5zDZGHQckg5xDV+OOO+6r61XwPhPmd/4PO6CqD725Gk=",
+        "lastModified": 1772801355,
+        "narHash": "sha256-geQfOFn5Uv2OFrfe38xfxaLnKykBnkcjFy/fLh5Gsfo=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "45ac20b8aa1c96751af6824bf7dd736554ef7938",
+        "rev": "1d9dcd2a27736b83d20abc0111141fdd6bffde7e",
         "type": "github"
       },
       "original": {
