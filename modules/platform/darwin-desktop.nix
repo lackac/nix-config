@@ -13,10 +13,15 @@ in
 
       time.timeZone = "Europe/Budapest";
 
-      system.keyboard = {
-        enableKeyMapping = true;
-        remapCapsLockToControl = true;
-        nonUS.remapTilde = true;
+      launchd.user.agents.remap-keys = {
+        serviceConfig = {
+          Label = "hu.lackac.remap-keys";
+          ProgramArguments = [
+            "/bin/sh"
+            (builtins.toString (builtins.path { path = ../../scripts/remap-keys.sh; }))
+          ];
+          RunAtLoad = true;
+        };
       };
 
       system.defaults = {
