@@ -1,7 +1,7 @@
 { config, inputs, ... }:
 let
   inherit (config) vars;
-  hmModules = inputs.self.modules.homeManager;
+  hmModules = config.flake.modules.homeManager;
 in
 {
   flake.modules.darwin.home =

@@ -9,7 +9,7 @@ in
       "1password-cli"
     ];
 
-    home-manager.users.${vars.username}.imports = [ inputs.self.modules.homeManager.onePassword ];
+    home-manager.users.${vars.username}.imports = [ config.flake.modules.homeManager.onePassword ];
   };
 
   flake.modules.homeManager.onePassword =

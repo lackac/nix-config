@@ -7,7 +7,7 @@ let
     inherit (config) vars;
   };
 
-  lithiumAspects = with inputs.self.modules.darwin; [
+  lithiumAspects = with config.flake.modules.darwin; [
     common
     desktop
     disable-hotkeys

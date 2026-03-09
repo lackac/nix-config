@@ -1,6 +1,6 @@
-{ inputs, ... }:
+{ config, ... }:
 let
-  hmModules = inputs.self.modules.homeManager;
+  hmModules = config.flake.modules.homeManager;
 in
 {
   flake.modules.homeManager.apps =
