@@ -16,6 +16,7 @@ let
     hammerspoon
     homebrew
     home
+    keyboard-layout
     onePassword
   ];
 
