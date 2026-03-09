@@ -9,7 +9,7 @@
         in
         [
           inputs.oc-config.packages.${system}.opencode
-          inputs.oc-config.packages.${system}.oh-my-opencode
+          inputs.oc-config.packages.${system}.oh-my-openagent
         ];
     };
 }
