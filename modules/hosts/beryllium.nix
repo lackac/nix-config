@@ -13,6 +13,7 @@ let
     disable-hotkeys
     fonts
     hammerspoon
+    homebrew
     home
     keyboard-layout
     onePassword

@@ -4,6 +4,7 @@
     { ... }:
     {
       homebrew.casks = [
+        "crossover"
         "curseforge"
         "minecraft"
         "steam"
