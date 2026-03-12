@@ -18,6 +18,7 @@ let
     home
     keyboard-layout
     onePassword
+    tailscale
   ];
 
   lithiumInline = {

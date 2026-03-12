@@ -14,4 +14,10 @@ _: {
 
       networking.firewall.trustedInterfaces = [ "tailscale0" ];
     };
+
+  flake.modules.darwin.tailscale = {
+    homebrew.casks = [
+      "tailscale-app"
+    ];
+  };
 }

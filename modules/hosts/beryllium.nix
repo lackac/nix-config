@@ -17,6 +17,7 @@ let
     home
     keyboard-layout
     onePassword
+    tailscale
   ];
 
   berylliumInline = {
