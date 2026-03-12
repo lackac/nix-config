@@ -45,9 +45,16 @@ in
 
       users.users.${vars.username} = {
         home = "/Users/${vars.username}";
+        openssh.authorizedKeys.keys = vars.sshAuthorizedKeys;
       };
 
-      services.openssh.enable = true;
+      services.openssh = {
+        enable = true;
+        extraConfig = ''
+          PasswordAuthentication no
+          KbdInteractiveAuthentication no
+        '';
+      };
 
       programs.zsh.enable = true;
       environment.shells = [ pkgs.zsh ];
