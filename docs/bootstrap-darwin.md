@@ -173,3 +173,18 @@ To set up Brave profiles for `hs-config` URL/window rules, use the helper in
 ```
 
 Keep all Brave profile/sync details in `hs-config` + `hs-config-private`.
+
+______________________________________________________________________
+
+## 13. Manual app setup reminders
+
+After the first successful `darwin-switch`, you will likely still want to
+finish interactive setup for a few apps:
+
+- 1Password — sign in to the relevant accounts and confirm SSH agent settings
+- Tailscale — sign in and join the tailnet
+- Google Drive — sign in and choose which Drive content to sync locally
+- Brave / Chrome — sign in and restore profiles or sync state as needed
+- Obsidian — open your vault(s) and confirm plugins/themes/settings
+- Hammerspoon — grant macOS permissions and confirm the config loads
+- Syncthing — open the Web UI and re-add/approve devices and folders if needed
