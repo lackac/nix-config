@@ -28,10 +28,10 @@ build host:
 provision host ip:
   nix run nixpkgs#nixos-anywhere -- --flake .#{{host}} root@{{ip}}
 
-darwin-switch host="lithium":
+darwin-switch host=`scutil --get LocalHostName 2>/dev/null || hostname -s`:
   sudo darwin-rebuild switch --flake .#{{host}}
 
-darwin-check host="lithium":
+darwin-check host=`scutil --get LocalHostName 2>/dev/null || hostname -s`:
   sudo darwin-rebuild check --flake .#{{host}}
 
 check-builder builder="192.168.64.6" user="lackac":
