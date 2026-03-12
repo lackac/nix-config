@@ -24,7 +24,20 @@ cd ~/Code/lackac/nix-config
 
 ______________________________________________________________________
 
-## 3. App Store login (required for MAS apps)
+## 3. Install Xcode Command Line Tools
+
+Homebrew cask activation still expects Apple developer tools to be present on a
+fresh macOS system.
+
+```sh
+xcode-select --install
+```
+
+Wait for the installation to finish before the first `darwin-switch`.
+
+______________________________________________________________________
+
+## 4. App Store login (required for MAS apps)
 
 Homebrew's `mas` cannot install App Store apps without an active App Store
 session.
@@ -36,7 +49,7 @@ If you skip this, `darwin-switch` may fail during Homebrew Bundle when
 
 ______________________________________________________________________
 
-## 4. Bootstrap the sops age key (optional, before switch)
+## 5. Bootstrap the sops age key (optional, before switch)
 
 Only needed if this host consumes sops secrets during activation.
 
@@ -64,7 +77,7 @@ that stored key.
 
 ______________________________________________________________________
 
-## 5. Run the first darwin-switch
+## 6. Run the first darwin-switch
 
 ```sh
 nix run nix-darwin -- switch --flake .#lithium
@@ -76,7 +89,7 @@ aspect).
 
 ______________________________________________________________________
 
-## 6. Syncthing
+## 7. Syncthing
 
 Syncthing is enabled declaratively, but devices and folders are intentionally
 UI-managed for now:
@@ -103,7 +116,7 @@ You'll then need to accept the new device on your other devices.
 
 ______________________________________________________________________
 
-## 7. Clone companion repos
+## 8. Clone companion repos
 
 These repos are not managed by nix-darwin but are needed for a full
 environment:
@@ -122,7 +135,7 @@ git clone git@github.com:lackac/opencode-config.git ~/Code/lackac/opencode-confi
 
 ______________________________________________________________________
 
-## 8. Per-project language runtimes
+## 9. Per-project language runtimes
 
 Global `ruby` and `python3` are installed via `environment.systemPackages` for ad-hoc use.
 For project-specific versions or additional runtimes (Node, Go, Elixir, etc.),
@@ -130,7 +143,7 @@ use nix dev shells via direnv.
 
 ______________________________________________________________________
 
-## 9. SSH: work-specific host config
+## 10. SSH: work-specific host config
 
 Work-specific SSH hosts (VPN endpoints, AWS SSM targets, etc.) are not
 managed by nix. Add them to `~/.ssh/config.local` — this file is included
@@ -138,7 +151,7 @@ automatically by the nix-managed SSH config.
 
 ______________________________________________________________________
 
-## 10. Git: machine-local overrides
+## 11. Git: machine-local overrides
 
 Create `~/.config/git/local` for machine-specific git settings (work email,
 private remotes, etc.):
@@ -150,7 +163,7 @@ private remotes, etc.):
 
 ______________________________________________________________________
 
-## 11. Brave profile scaffold (if using hs-config URL/window rules)
+## 12. Brave profile scaffold (if using hs-config URL/window rules)
 
 To set up Brave profiles for `hs-config` URL/window rules, use the helper in
 `hs-config`.
