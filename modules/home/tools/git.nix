@@ -55,7 +55,7 @@
           user = {
             name = vars.fullName;
             email = vars.email;
-            signingkey = "~/.ssh/git-signing.pub";
+            signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF5ifzgwgrEKpUsQpIVw2vraFWQ/oqSgljIKUaP06QS6 git-signing";
           };
 
           alias = {
