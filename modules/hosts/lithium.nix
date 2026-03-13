@@ -30,7 +30,6 @@ let
     homebrew = {
       casks = [
         "autodesk-fusion"
-        "dash"
         "discord"
         "iina"
         "mattermost"
@@ -39,7 +38,6 @@ let
         "plex"
         "prusaslicer"
         "slack"
-        "tableplus"
         "utm"
         "viscosity"
       ];

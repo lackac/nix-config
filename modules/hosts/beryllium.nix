@@ -24,6 +24,12 @@ let
     networking.hostName = "beryllium";
     networking.computerName = "beryllium";
     system.stateVersion = 6;
+
+    homebrew = {
+      casks = [
+        "viscosity"
+      ];
+    };
   };
 
   berylliumModules = berylliumAspects ++ [ berylliumInline ];

@@ -36,6 +36,7 @@
           "brave-browser"
           "chatgpt"
           "claude"
+          "dash"
           "google-chrome"
           "google-drive"
           "hammerspoon"
@@ -43,6 +44,7 @@
           "obsidian"
           "session-manager-plugin"
           "shortcat"
+          "tableplus"
         ];
 
         masApps = {
