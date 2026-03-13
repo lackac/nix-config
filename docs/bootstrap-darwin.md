@@ -13,6 +13,19 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 Restart your shell to pick up the Nix environment.
 
+On a fresh machine, add your login user to Determinate Nix's trusted users
+before the first flake evaluation. Edit `/etc/nix/nix.custom.conf` and add:
+
+```ini
+extra-trusted-users = lackac
+```
+
+Then restart the Determinate Nix daemon so it picks up the new setting:
+
+```sh
+sudo launchctl kickstart -k system/systems.determinate.nix-daemon
+```
+
 ______________________________________________________________________
 
 ## 2. Clone this repo
