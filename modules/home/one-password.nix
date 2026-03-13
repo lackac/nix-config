@@ -8,11 +8,15 @@ in
       "1password"
       "1password-cli"
     ];
-
-    home-manager.users.${vars.username}.imports = [ config.flake.modules.homeManager.onePassword ];
   };
 
-  flake.modules.homeManager.onePassword =
+  flake.modules.darwin.onePasswordSshAgent = {
+    home-manager.users.${vars.username}.imports = [
+      config.flake.modules.homeManager.onePasswordSshAgent
+    ];
+  };
+
+  flake.modules.homeManager.onePasswordSshAgent =
     {
       lib,
       config,
