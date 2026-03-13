@@ -100,6 +100,12 @@ This installs nix-darwin, home-manager, Homebrew (via nix-homebrew), and all
 declared packages (including 1Password and 1Password CLI via the `onePassword`
 aspect).
 
+Before continuing, finish the two interactive setups that later bootstrap steps
+depend on:
+
+- 1Password — sign in to the relevant accounts and confirm any SSH integration you intend to use on this host
+- Tailscale — sign in and join the tailnet
+
 ______________________________________________________________________
 
 ## 7. Syncthing
@@ -143,7 +149,7 @@ git clone git@github.com:lackac/hs-config-private.git ~/.hammerspoon/private
 git clone git@github.com:lackac/nvf-config.git ~/Code/lackac/nvf-config
 
 # OpenCode config (if applicable)
-git clone git@github.com:lackac/opencode-config.git ~/Code/lackac/opencode-config
+git clone git@github.com:lackac/oc-config.git ~/Code/lackac/oc-config
 ```
 
 ______________________________________________________________________
@@ -194,8 +200,6 @@ ______________________________________________________________________
 After the first successful `darwin-switch`, you will likely still want to
 finish interactive setup for a few apps:
 
-- 1Password — sign in to the relevant accounts and confirm SSH agent settings
-- Tailscale — sign in and join the tailnet
 - Google Drive — sign in and choose which Drive content to sync locally
 - Brave / Chrome — sign in and restore profiles or sync state as needed
 - Obsidian — open your vault(s) and confirm plugins/themes/settings
