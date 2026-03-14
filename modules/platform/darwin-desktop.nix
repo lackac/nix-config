@@ -53,6 +53,7 @@ in
         menuExtraClock.Show24Hour = true;
 
         screencapture = {
+          disable-shadow = true;
           location = "~/Documents/Screenshots";
           type = "png";
         };
@@ -81,6 +82,7 @@ in
         NSGlobalDomain = {
           AppleKeyboardUIMode = 3;
           ApplePressAndHoldEnabled = false;
+          AppleShowScrollBars = "Always";
           InitialKeyRepeat = 15;
           KeyRepeat = 2;
           NSAutomaticCapitalizationEnabled = false;
@@ -89,6 +91,7 @@ in
           NSAutomaticQuoteSubstitutionEnabled = false;
           NSAutomaticSpellingCorrectionEnabled = false;
           AppleSpacesSwitchOnActivate = true;
+          NSTableViewDefaultSizeMode = 2;
           "com.apple.swipescrolldirection" = true;
           "com.apple.sound.beep.feedback" = 0;
           AppleInterfaceStyleSwitchesAutomatically = true;

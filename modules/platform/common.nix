@@ -84,6 +84,7 @@ in
         };
 
         environment.systemPackages = with pkgs; [
+          m-cli
           ruby
           python3
         ];
