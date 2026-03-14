@@ -10,6 +10,7 @@ in
         starship
         atuin
         bat
+        cli-toolbox
         direnv
         eza
         fzf

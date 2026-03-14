@@ -86,6 +86,11 @@
       url = "github:lackac/oc-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    cli-toolbox = {
+      url = "github:lackac/cli-toolbox";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
