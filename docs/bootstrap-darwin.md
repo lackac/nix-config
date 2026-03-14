@@ -188,20 +188,14 @@ To set up Brave profiles for `hs-config` URL/window rules, use the helper in
 `hs-config`.
 
 ```sh
-~/Code/lackac/hs-config/scripts/seed-brave-profiles.sh --help
+~/Code/lackac/hs-config/scripts/seed-brave-profiles.sh
 ```
-
-Keep all Brave profile/sync details in `hs-config` + `hs-config-private`.
 
 ______________________________________________________________________
 
 ## 13. Manual app setup reminders
 
 After the first successful `darwin-switch`, you will likely still want to
-finish interactive setup for a few apps:
-
-- Google Drive — sign in and choose which Drive content to sync locally
-- Brave / Chrome — sign in and restore profiles or sync state as needed
-- Obsidian — open your vault(s) and confirm plugins/themes/settings
-- Hammerspoon — grant macOS permissions and confirm the config loads
-- Syncthing — open the Web UI and re-add/approve devices and folders if needed
+finish interactive setup for the GUI apps you actually plan to use on this
+host. Review the apps present on the machine and decide which ones need
+sign-in, config restore, or data migration.
