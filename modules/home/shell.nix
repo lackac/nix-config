@@ -70,6 +70,9 @@
               ""
           }
 
+          autoload -Uz select-word-style
+          select-word-style bash
+
           export PATH="$PATH:${localBin}${if isDarwin then ":${homebrewFallbackPath}" else ""}"
         '';
       };
