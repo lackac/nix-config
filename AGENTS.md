@@ -12,6 +12,9 @@ brainstorming and execution. Long-lived operational guidance belongs in
 
 - **Pattern:** Dendritic (flake-parts + import-tree). Every file is a
   flake-parts module.
+- **Import-tree reminder:** New `.nix` files under `modules/` must be tracked by
+  git before flake evaluation can see them. Untracked files are not part of the
+  git-backed flake source snapshot.
 - **Hosts:** carbon (NixOS/x86_64, N100 server), boron (NixOS/x86_64, N100
   server), beryllium (darwin/aarch64, Mac Mini), lithium (darwin/aarch64,
   MacBook)
@@ -43,6 +46,9 @@ brainstorming and execution. Long-lived operational guidance belongs in
 - Attribute sets: one attribute per line
 - String interpolation: `${variable}`, prefer double quotes
 - Naming: kebab-case for file and attribute names, camelCase for functions
+- Prefer dashed aspect names for flake modules (for example
+  `flake.modules.homeManager.cli-toolbox`) and use the same dashed name when
+  importing them from `config.flake.modules.*`.
 - Nix files define features, not hosts or module types. A file may contribute
   NixOS, darwin, and home-manager modules.
 - For shell helper scripts longer than ~15 lines, keep script content in a
