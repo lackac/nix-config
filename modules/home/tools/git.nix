@@ -74,6 +74,7 @@
             resolve = "!git ls-files --unmerged | cut -c51- | sort -u | xargs git add";
           };
 
+          url."git@git.lackac.hu:lackac/".insteadOf = "gitea:";
           url."ssh://git@github.com/".insteadOf = "https://github.com/";
 
           gpg.format = "ssh";
