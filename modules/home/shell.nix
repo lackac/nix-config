@@ -17,6 +17,7 @@
         mwget = "wget -v -c -x -r -l 0 -L -np";
 
         oc = "opencode";
+        ocs = "opencode-session";
 
         cal = "gcal -s1 -H '\\e[44;37m:\\e[0m:\\e[42;37m:\\e[0m'";
         cal-hu = "cal -qHU";
