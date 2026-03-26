@@ -6,7 +6,7 @@
       programs.sesh = {
         enable = true;
         enableAlias = true;
-        tmuxKey = ";";
+        enableTmuxIntegration = false;
 
         settings = {
           default_session = {

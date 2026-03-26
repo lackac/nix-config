@@ -68,7 +68,25 @@
 
           unbind f
           bind f popup -E
-          bind k popup -E -w 80% -h 70% -d "#{pane_current_path}" "selected=\$(sesh list -t -c -d -H | fzf --no-sort --prompt='🪟  '); [ -n \"\$selected\" ] && sesh connect \"\$selected\""
+          bind \; run-shell "sesh connect \"$(
+            sesh list --icons | fzf --tmux 80%,70% \
+              --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+              --delimiter '/' \
+              --nth '-1' \
+              --header '  ^a all ^t tmux ^g configs ^d zoxide ^x tmux kill ^p path ^b basename' \
+              --bind 'tab:down,btab:up' \
+              --bind 'ctrl-a:change-prompt(⚡  )+change-nth(-1)+reload(sesh list --icons)' \
+              --bind 'ctrl-t:change-prompt(🪟  )+change-nth(-1)+reload(sesh list --icons -t)' \
+              --bind 'ctrl-g:change-prompt(⚙️  )+change-nth(-1)+reload(sesh list --icons -c)' \
+              --bind 'ctrl-d:change-prompt(📁  )+change-nth(-1)+reload(sesh list --icons -z)' \
+              --bind 'ctrl-x:execute(tmux-session-kill --session {2..})+change-prompt(⚡  )+change-nth(-1)+reload(sesh list --icons)' \
+              --bind 'ctrl-p:change-prompt(⚡  )+change-nth(..)' \
+              --bind 'ctrl-b:change-prompt(⚡  )+change-nth(-1)' \
+              --preview-window 'right:55%' \
+              --preview 'sesh preview {}' \
+              -- --ansi
+          )\""
+          bind k run-shell "sesh connect \"$(sesh list -t -c -H | fzf --tmux 80%,70% --no-sort --prompt '🪟  ')\""
           unbind l
           bind l popup -E -w 80% -h 80% lazygit
           bind g split-window -h -b -p 62 -c "#{pane_current_path}" lazygit
