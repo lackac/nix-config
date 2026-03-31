@@ -17,7 +17,7 @@ See `Justfile` for the full command surface.
 - `modules/`: flake-parts modules (hosts, platform, packages, home, services).
 - `secrets/`: encrypted secrets managed by sops-nix.
 - `scripts/`: helper scripts used by modules or operational workflows.
-- `docs/`: operational documentation (`docs/howto-provision-server.md`).
+- `docs/`: operational documentation (`docs/howto-provision-server.md`, `docs/bootstrap-darwin.md`, `docs/upgrade-runbook.md`).
 
 ## Hosts
 
