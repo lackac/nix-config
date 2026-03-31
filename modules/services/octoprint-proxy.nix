@@ -7,7 +7,7 @@
         enable = true;
         package = pkgs.caddy.withPlugins {
           plugins = [ "github.com/caddy-dns/dnsimple@v0.0.0-20251214142352-69317c3989f0" ];
-          hash = "sha256-J82XQgnl+K51sEY1FEb60Z+B71qyrEy00gMg2zBVJgA=";
+          hash = "sha256-fyP9Zom08m3tpQbaGUTl+zDYGneyrxt1gTeu5VQ/hFY=";
         };
 
         email = "admin@lackac.hu";

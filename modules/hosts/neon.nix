@@ -32,7 +32,7 @@ in
     imports = neonModules;
 
     deployment = {
-      targetHost = "192.168.64.6";
+      targetHost = "neon";
       targetUser = "lackac";
       allowLocalDeployment = false;
     };

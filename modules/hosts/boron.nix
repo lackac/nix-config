@@ -45,7 +45,7 @@ in
     imports = boronModules;
 
     deployment = {
-      targetHost = "10.7.0.201";
+      targetHost = "boron";
       targetUser = "lackac";
       allowLocalDeployment = false;
     };
