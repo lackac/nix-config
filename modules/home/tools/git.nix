@@ -7,10 +7,11 @@
         delta
         git-lfs
         gh
-        tea
+        forgejo-cli
       ];
 
       home.shellAliases = {
+        forgejo = "fj";
         gst = "git status -sb";
         gl = "git log --decorate --graph --pretty=\"%C(auto)%h%d %C(bold)%s %C(blue)%ar%Creset %ad\" --date=iso";
         glb = "gl --branches";
@@ -74,7 +75,7 @@
             resolve = "!git ls-files --unmerged | cut -c51- | sort -u | xargs git add";
           };
 
-          url."git@git.lackac.hu:lackac/".insteadOf = "gitea:";
+          url."git@git.lackac.hu:lackac/".insteadOf = "lackac:";
           url."ssh://git@github.com/".insteadOf = "https://github.com/";
 
           gpg.format = "ssh";

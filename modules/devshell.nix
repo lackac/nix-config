@@ -27,7 +27,7 @@
 
             # Utilities
             git
-            tea
+            forgejo-cli
             just
             pwgen
           ])

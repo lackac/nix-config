@@ -21,7 +21,7 @@ let
     tailscale
     postgres
     mattermost
-    gitea
+    git
     caddy
   ];
 

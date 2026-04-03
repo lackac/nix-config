@@ -1,28 +1,33 @@
 { ... }:
 {
-  flake.modules.nixos.gitea =
-    { ... }:
+  flake.modules.nixos.git =
+    { pkgs, ... }:
+    let
+      forgejoPort = 3000;
+    in
     {
       users.groups.git = { };
 
       users.users.git = {
         isSystemUser = true;
         group = "git";
-        home = "/var/lib/gitea";
+        home = "/var/lib/forgejo";
         createHome = true;
         useDefaultShell = true;
       };
 
-      services.gitea = {
+      services.forgejo = {
         enable = true;
+        package = pkgs.forgejo;
         user = "git";
         group = "git";
+        stateDir = "/var/lib/forgejo";
 
         database = {
           type = "postgres";
-          createDatabase = true;
+          createDatabase = false;
           socket = "/run/postgresql";
-          name = "git";
+          name = "forgejo";
           user = "git";
         };
 
@@ -45,8 +50,9 @@
           server = {
             DOMAIN = "git.lackac.hu";
             ROOT_URL = "https://git.lackac.hu/";
+            LOCAL_ROOT_URL = "http://127.0.0.1:${toString forgejoPort}/";
             HTTP_ADDR = "127.0.0.1";
-            HTTP_PORT = 3000;
+            HTTP_PORT = forgejoPort;
             DISABLE_SSH = false;
             START_SSH_SERVER = false;
             SSH_PORT = 22;
@@ -66,7 +72,7 @@
 
       services.caddy.extraConfig = ''
         git.lackac.hu {
-          reverse_proxy 127.0.0.1:3000
+          reverse_proxy 127.0.0.1:${toString forgejoPort}
         }
       '';
 
