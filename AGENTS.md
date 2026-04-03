@@ -145,10 +145,10 @@ Passed to NixOS/darwin evaluations via `specialArgs`.
 
 ## Project Tracking
 
-Primary backlog tracking for this repo lives in the Gitea issue tracker, not in
+Primary backlog tracking for this repo lives in the Forgejo issue tracker, not in
 local plan files.
 
-- Use Gitea issues as the source of truth for follow-up work, migration gaps,
+- Use Forgejo issues as the source of truth for follow-up work, migration gaps,
   and deferred decisions.
 - Use milestones to group work by migration phase:
   - `Beryllium smoke test`
@@ -162,5 +162,5 @@ local plan files.
 - When new work is discovered during implementation or migration, create or
   update an issue instead of relying on ad-hoc local notes.
 - Keep public repo docs concise; put fast-changing operational notes either in
-  Gitea wiki pages or issues, depending on whether they are durable reference or
+  Forgejo wiki pages or issues, depending on whether they are durable reference or
   active backlog.

@@ -1,17 +1,19 @@
 { ... }:
 {
-  flake.modules.nixos."gitea-runner" =
+  flake.modules.nixos."git-actions-runner" =
     { config, pkgs, ... }:
     let
       hostName = config.networking.hostName;
       system = pkgs.stdenv.hostPlatform.system;
     in
     {
+      services.gitea-actions-runner.package = pkgs.forgejo-runner;
+
       services.gitea-actions-runner.instances.${hostName} = {
         enable = true;
         name = "${hostName}-${system}";
         url = "https://git.lackac.hu";
-        tokenFile = config.sops.templates."gitea-actions-runner/token.env".path;
+        tokenFile = config.sops.templates."git-actions-runner/token.env".path;
 
         hostPackages = with pkgs; [
           bash
@@ -31,12 +33,12 @@
         ];
       };
 
-      sops.secrets."gitea/runnerRegistrationToken" = {
+      sops.secrets."git-actions-runner/runnerRegistrationToken" = {
         sopsFile = ../../secrets/common.yaml;
       };
 
-      sops.templates."gitea-actions-runner/token.env".content = ''
-        TOKEN=${config.sops.placeholder."gitea/runnerRegistrationToken"}
+      sops.templates."git-actions-runner/token.env".content = ''
+        TOKEN=${config.sops.placeholder."git-actions-runner/runnerRegistrationToken"}
       '';
     };
 }

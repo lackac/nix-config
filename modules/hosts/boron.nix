@@ -19,7 +19,7 @@ let
 
     # Features
     docker
-    inputs.self.modules.nixos."gitea-runner"
+    git-actions-runner
     mc
     garage
     caddy
