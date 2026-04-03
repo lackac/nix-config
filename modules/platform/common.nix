@@ -22,6 +22,8 @@ let
   commonBase = pkgs: {
     environment.systemPackages = commonPackages pkgs;
 
+    environment.variables.EDITOR = lib.mkForce "nvim";
+
     users.users.${vars.username}.openssh.authorizedKeys.keys = vars.sshAuthorizedKeys;
 
     services.openssh.enable = true;
