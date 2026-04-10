@@ -45,7 +45,7 @@
         extraConfig = ''
           set -g default-terminal "tmux-256color"
 
-          set -sa terminal-features ",xterm-kitty:RGB"
+          set -sa terminal-features ",xterm-kitty:RGB,xterm-ghostty:RGB:usstyle"
           set -gq allow-passthrough on
           set -sa terminal-overrides ',*:Smulx=\E[4::%p1%dm'
           set -sa terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
