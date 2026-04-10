@@ -7,6 +7,7 @@ in
     { ... }:
     {
       imports = with hmModules; [
+        ghostty
         kitty
       ];
     };
