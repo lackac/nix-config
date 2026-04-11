@@ -145,6 +145,14 @@ Passed to NixOS/darwin evaluations via `specialArgs`.
 
 ## Project Tracking
 
+**Forgejo is the source of truth for this repo.**
+
+- Use `fj` / `forgejo-cli` for issues, PRs, milestones, labels, and wiki work in
+  this repository.
+- Do not use `gh` for tracker operations here unless the user explicitly asks
+  for GitHub.
+- Treat GitHub as a mirror/secondary remote; treat Forgejo as authoritative.
+
 Primary backlog tracking for this repo lives in the Forgejo issue tracker, not in
 local plan files.
 
