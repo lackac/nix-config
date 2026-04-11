@@ -108,7 +108,31 @@ depend on:
 
 ______________________________________________________________________
 
-## 7. Syncthing
+## 7. Optional: configure NextDNS on lithium
+
+`lithium` installs the NextDNS CLI, but its runtime configuration is still
+machine-local. If you want this host to use NextDNS, do the one-time setup
+after the first successful `darwin-switch`:
+
+```sh
+sudo nextdns install \
+  -config <your-config-id> \
+  -report-client-info \
+  -auto-activate
+```
+
+To use split DNS, add any forwarders you need for your Tailscale domain or
+home network names, then restart the service:
+
+```sh
+sudo nextdns config set -forwarder "<your-tailnet-domain>=100.100.100.100"
+sudo nextdns config set -forwarder "<your-home-domain>=<your-router-dns-ip>"
+sudo nextdns restart
+```
+
+______________________________________________________________________
+
+## 8. Syncthing
 
 Syncthing is enabled declaratively, but devices and folders are intentionally
 UI-managed for now:
@@ -135,7 +159,7 @@ You'll then need to accept the new device on your other devices.
 
 ______________________________________________________________________
 
-## 8. Clone companion repos
+## 9. Clone companion repos
 
 These repos are not managed by nix-darwin but are needed for a full
 environment:
@@ -154,7 +178,7 @@ git clone git@github.com:lackac/oc-config.git ~/Code/lackac/oc-config
 
 ______________________________________________________________________
 
-## 9. Per-project language runtimes
+## 10. Per-project language runtimes
 
 Global `ruby` and `python3` are installed via `environment.systemPackages` for ad-hoc use.
 For project-specific versions or additional runtimes (Node, Go, Elixir, etc.),
@@ -162,7 +186,7 @@ use nix dev shells via direnv.
 
 ______________________________________________________________________
 
-## 10. SSH: work-specific host config
+## 11. SSH: work-specific host config
 
 Work-specific SSH hosts (VPN endpoints, AWS SSM targets, etc.) are not
 managed by nix. Add them to `~/.ssh/config.local` — this file is included
@@ -170,7 +194,7 @@ automatically by the nix-managed SSH config.
 
 ______________________________________________________________________
 
-## 11. Git: machine-local overrides
+## 12. Git: machine-local overrides
 
 Create `~/.config/git/local` for machine-specific git settings (work email,
 private remotes, etc.):
@@ -182,7 +206,7 @@ private remotes, etc.):
 
 ______________________________________________________________________
 
-## 12. Brave profile scaffold (if using hs-config URL/window rules)
+## 13. Brave profile scaffold (if using hs-config URL/window rules)
 
 To set up Brave profiles for `hs-config` URL/window rules, use the helper in
 `hs-config`.
@@ -193,7 +217,7 @@ To set up Brave profiles for `hs-config` URL/window rules, use the helper in
 
 ______________________________________________________________________
 
-## 13. Manual app setup reminders
+## 14. Manual app setup reminders
 
 After the first successful `darwin-switch`, you will likely still want to
 finish interactive setup for the GUI apps you actually plan to use on this

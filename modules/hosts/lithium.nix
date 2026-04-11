@@ -28,6 +28,8 @@ let
     system.stateVersion = 6;
 
     homebrew = {
+      brews = [ "nextdns" ];
+
       casks = [
         "autodesk-fusion"
         "discord"
