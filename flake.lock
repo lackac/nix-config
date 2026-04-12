@@ -795,11 +795,11 @@
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
-        "lastModified": 1775146433,
-        "narHash": "sha256-rs/1Nc8hSsQr7r44guQ97smvaJuAkDjaOBX8djp5cMA=",
+        "lastModified": 1776015545,
+        "narHash": "sha256-PCiZVwcG4S9KO7F8vNZJWkbvi698XF0KFJU6b/vvIRQ=",
         "owner": "lackac",
         "repo": "oc-config",
-        "rev": "e0859e8e793b9e5d19f75046ba1e4e43e3abca24",
+        "rev": "21a406957eff22aa432e5c0350e3696043d5674f",
         "type": "github"
       },
       "original": {
@@ -811,11 +811,11 @@
     "oh-my-openagent": {
       "flake": false,
       "locked": {
-        "lastModified": 1775112369,
-        "narHash": "sha256-0YKyqJAj/LGM2ReufRJEWowmnkq1Msli48gystT3CAo=",
+        "lastModified": 1775824194,
+        "narHash": "sha256-/WSJ09Ly/CNBZ3whCDeg+Hi/0GEomBgF+mIpq6ALMLA=",
         "owner": "code-yeongyu",
         "repo": "oh-my-openagent",
-        "rev": "9c67585519c77b6df6dcbdddbe38f090df44be85",
+        "rev": "b7ca40f646a342b1be79c1633b0ad88b8ed682ff",
         "type": "github"
       },
       "original": {
@@ -833,11 +833,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774930076,
-        "narHash": "sha256-N/7wjq0NnZkZzlfNj+3fRiDiybn+Q+yRY85YJgAVW0Y=",
+        "lastModified": 1775798145,
+        "narHash": "sha256-y8lTBGkoNUTeOIvRn3p5tGnB5YY5KlitGaz/wm93ENg=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "2cc738fb1794470d28b6795f2267b9b756d4be88",
+        "rev": "ce19c051be86b5d0fff458bf4d74803c40c06350",
         "type": "github"
       },
       "original": {
