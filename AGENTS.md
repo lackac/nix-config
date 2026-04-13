@@ -54,6 +54,12 @@ brainstorming and execution. Long-lived operational guidance belongs in
 - For shell helper scripts longer than ~15 lines, keep script content in a
   separate `.sh` file and reference it from Nix (for example with
   `builtins.readFile`).
+- When an aspect needs tracked support files (for example ignore files,
+  templates, or helper assets), keep them adjacent to the aspect instead of in
+  a generic top-level `files/` directory unless the asset is truly shared. A
+  single nearby file is fine; if an aspect grows multiple support files, prefer
+  a dedicated adjacent directory and keep the filenames specific enough to
+  distinguish them.
 
 ## Commit Message Style
 
