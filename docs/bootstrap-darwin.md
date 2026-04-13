@@ -134,28 +134,24 @@ ______________________________________________________________________
 
 ## 8. Syncthing
 
-Syncthing is enabled declaratively, but devices and folders are intentionally
-UI-managed for now:
+Syncthing is enabled declaratively on Darwin hosts, including `beryllium`.
 
-- configure devices/folders in Syncthing Web UI (`http://127.0.0.1:8384`)
-- topology changes (devices/folders) are not overwritten by nix
+Target shape:
 
-Optional migration step to keep the same device ID from an old machine:
+- stable device IDs live in `vars.syncthing.deviceIds`
+- shared Syncthing policy is managed in nix
+- `~/Code` and `~/Life` are the first shared folders modeled in nix between
+  `lithium` and `beryllium`
+- `~/Code/.stignore` is managed declaratively, so ignore policy survives a new
+  machine bootstrap
+- devices and folders not modeled in nix remain outside this shape until they
+  are intentionally brought in
 
-To keep the same Syncthing device ID as your previous machine (avoiding
-re-pairing all devices), copy the identity files before Syncthing starts:
+Connectivity policy:
 
-```sh
-mkdir -p ~/Library/Application\ Support/Syncthing
-# Copy from old machine (or from backup):
-scp oldmachine:~/Library/Application\ Support/Syncthing/cert.pem \
-    ~/Library/Application\ Support/Syncthing/cert.pem
-scp oldmachine:~/Library/Application\ Support/Syncthing/key.pem \
-    ~/Library/Application\ Support/Syncthing/key.pem
-```
-
-If you don't have the old cert/key, Syncthing will generate a new identity.
-You'll then need to accept the new device on your other devices.
+- prefer Tailscale-only connectivity between devices
+- do not rely on public relays when direct Tailscale connectivity is enough
+- add the NAS to Tailscale first, then fold it into the Syncthing topology
 
 ______________________________________________________________________
 
