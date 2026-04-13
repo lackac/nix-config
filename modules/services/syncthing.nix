@@ -17,6 +17,11 @@
         name: id: id != null && (localHostName == null || name != localHostName)
       ) vars.syncthing.deviceIds;
 
+      peerAddresses = name: [
+        "tcp://${name}:22000"
+        "quic://${name}:22000"
+      ];
+
       sharedFolderDevices = builtins.attrNames knownPeerIds;
     in
     {
@@ -32,7 +37,10 @@
 
         settings = {
           # Mixed declarative and UI-managed topology is intentional for now.
-          devices = lib.mapAttrs (_: id: { inherit id; }) knownPeerIds;
+          devices = lib.mapAttrs (name: id: {
+            inherit id;
+            addresses = peerAddresses name;
+          }) knownPeerIds;
 
           folders = {
             code = {
