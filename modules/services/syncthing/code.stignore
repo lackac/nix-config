@@ -1,0 +1,54 @@
+// Sync source and local state; ignore only rebuildable or high-churn artifacts.
+
+// OS junk
+(?d).DS_Store
+(?d)Thumbs.db
+(?d)desktop.ini
+
+// Git metadata is intentionally kept for now.
+// If you later decide to trade recovery fidelity for lower churn, revisit this.
+// .git
+
+// Environment and tool caches
+**/.direnv
+**/.cache
+**/.elixir_ls
+**/.terragrunt-cache
+**/.terraform
+
+// JavaScript and frontend
+**/node_modules
+**/.next
+**/.nuxt
+**/.turbo
+**/bower_components
+**/dist
+**/build
+**/coverage
+
+// Elixir
+**/_build
+**/deps
+
+// Ruby
+**/.bundle
+**/vendor/bundle
+**/vendor/ruby
+
+// Python
+**/.venv
+**/venv
+**/__pycache__
+**/.mypy_cache
+**/.pytest_cache
+**/.ruff_cache
+
+// Rust, JVM, and generic build outputs
+**/target
+**/.gradle
+**/out
+
+// General transient output
+**/tmp
+**/log
+**/result
