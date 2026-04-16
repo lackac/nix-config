@@ -35,7 +35,6 @@
         casks = [
           "brave-browser"
           "chatgpt"
-          "claude"
           "dash"
           "google-chrome"
           "google-drive"
