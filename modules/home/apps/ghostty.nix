@@ -14,8 +14,10 @@
           font-family-bold-italic = "CaskaydiaCove Nerd Font Mono Semibold Italic";
           font-feature = "+zero";
           font-size = 14;
+          cursor-style = "block";
           copy-on-select = false;
           shell-integration = "detect";
+          shell-integration-features = "no-cursor";
           confirm-close-surface = false;
           quit-after-last-window-closed = true;
           macos-option-as-alt = false;
