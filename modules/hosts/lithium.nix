@@ -43,11 +43,6 @@ let
         "utm"
         "viscosity"
       ];
-
-      masApps = {
-        "Affinity Designer" = 824171161;
-        "Affinity Photo" = 824183456;
-      };
     };
   };
 
