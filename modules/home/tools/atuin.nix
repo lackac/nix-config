@@ -7,7 +7,6 @@
         enable = true;
         enableBashIntegration = true;
         enableZshIntegration = true;
-        flags = [ "--disable-up-arrow" ];
         settings = {
           dialect = "uk";
           inline_height = 25;
