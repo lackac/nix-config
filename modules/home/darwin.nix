@@ -25,6 +25,7 @@ in
               hmModules.shell
               hmModules.cli-tools
               hmModules.apps
+              hmModules.darwin-desktop
               hmModules.hammerspoon
               hmModules.syncthing
               hmModules.tools

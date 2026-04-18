@@ -3,6 +3,22 @@ let
   inherit (config) vars;
 in
 {
+  flake.modules.homeManager.darwin-desktop =
+    { lib, osConfig, ... }:
+    {
+      targets.darwin.currentHostDefaults = lib.mkIf (osConfig.networking.hostName == "lithium") {
+        NSGlobalDomain = {
+          AppleEnableSwipeNavigateWithScrolls = false;
+          "com.apple.mouse.tapBehavior" = 1;
+          "com.apple.trackpad.fourFingerHorizSwipeGesture" = 2;
+          "com.apple.trackpad.fourFingerVertSwipeGesture" = 2;
+          "com.apple.trackpad.threeFingerDragGesture" = false;
+          "com.apple.trackpad.threeFingerHorizSwipeGesture" = 1;
+          "com.apple.trackpad.threeFingerVertSwipeGesture" = 0;
+        };
+      };
+    };
+
   flake.modules.darwin.desktop =
     { ... }:
     {
@@ -30,6 +46,8 @@ in
           show-recents = false;
           mru-spaces = false;
           expose-group-apps = true;
+          showAppExposeGestureEnabled = true;
+          showMissionControlGestureEnabled = true;
         };
 
         finder = {
@@ -67,8 +85,12 @@ in
 
         trackpad = {
           Clicking = true;
+          TrackpadFourFingerHorizSwipeGesture = 2;
+          TrackpadFourFingerVertSwipeGesture = 2;
           TrackpadRightClick = true;
-          TrackpadThreeFingerDrag = true;
+          TrackpadThreeFingerHorizSwipeGesture = 1;
+          TrackpadThreeFingerDrag = false;
+          TrackpadThreeFingerVertSwipeGesture = 0;
         };
 
         WindowManager = {
@@ -80,6 +102,7 @@ in
         };
 
         NSGlobalDomain = {
+          AppleEnableSwipeNavigateWithScrolls = false;
           AppleKeyboardUIMode = 3;
           ApplePressAndHoldEnabled = false;
           AppleShowScrollBars = "Always";
@@ -92,7 +115,10 @@ in
           NSAutomaticSpellingCorrectionEnabled = false;
           AppleSpacesSwitchOnActivate = true;
           NSTableViewDefaultSizeMode = 2;
+          "com.apple.mouse.tapBehavior" = 1;
+          "com.apple.keyboard.fnState" = true;
           "com.apple.swipescrolldirection" = true;
+          "com.apple.trackpad.scaling" = 3.0;
           "com.apple.sound.beep.feedback" = 0;
           AppleInterfaceStyleSwitchesAutomatically = true;
           NSNavPanelExpandedStateForSaveMode = true;
