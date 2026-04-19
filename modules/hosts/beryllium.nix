@@ -1,4 +1,9 @@
-{ config, inputs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
   targetSystem = "aarch64-darwin";
 
@@ -24,6 +29,11 @@ let
     networking.hostName = "beryllium";
     networking.computerName = "beryllium";
     system.stateVersion = 6;
+
+    system.defaults.dock = {
+      autohide = lib.mkForce false;
+      orientation = "left";
+    };
 
     homebrew = {
       casks = [

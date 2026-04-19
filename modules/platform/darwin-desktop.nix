@@ -44,6 +44,7 @@ in
         dock = {
           autohide = true;
           show-recents = false;
+          tilesize = 36;
           mru-spaces = false;
           expose-group-apps = true;
           showAppExposeGestureEnabled = true;
@@ -78,7 +79,6 @@ in
 
         screensaver = {
           askForPassword = true;
-          askForPasswordDelay = 0;
         };
 
         spaces."spans-displays" = false;
