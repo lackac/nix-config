@@ -56,7 +56,7 @@
           Sandbox = "$HOME/Code/sandbox";
         };
         dotDir = "${config.xdg.configHome}/zsh";
-        historySubstringSearch.enable = false;
+        historySubstringSearch.enable = true;
         syntaxHighlighting.enable = true;
 
         initContent = ''
