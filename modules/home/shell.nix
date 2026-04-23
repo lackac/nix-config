@@ -75,6 +75,15 @@
           select-word-style bash
 
           export PATH="$PATH:${localBin}${if isDarwin then ":${homebrewFallbackPath}" else ""}"
+
+          if [[ -f ''${XDG_CONFIG_HOME:-$HOME/.config}/subs ]]; then
+            for sub in $(grep -v '^#' ''${XDG_CONFIG_HOME:-$HOME/.config}/subs); do
+              [[ ''${sub:0:1} == "/" ]] || sub=$HOME/Code/$sub
+              if [[ -x $sub ]]; then
+                eval "$($sub init -)"
+              fi
+            done
+          fi
         '';
       };
 
