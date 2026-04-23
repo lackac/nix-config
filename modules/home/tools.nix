@@ -20,6 +20,7 @@ in
         ssh
         tmux
         tealdeer
+        units
         yazi
         zoxide
       ];

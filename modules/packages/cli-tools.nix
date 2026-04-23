@@ -22,7 +22,6 @@
         bc
         gcal
         ipcalc
-        units
         watch
 
         nix-output-monitor
