@@ -8,7 +8,7 @@ in
     {
       users.users.mc = {
         isNormalUser = true;
-        extraGroups = [ "docker" ];
+        extraGroups = [ "podman" ];
         openssh.authorizedKeys.keys = vars.sshAuthorizedKeys;
       };
     };

@@ -18,7 +18,7 @@ let
     disko-nvme
 
     # Features
-    docker
+    container-runtime
     git-actions-runner
     mc
     garage
