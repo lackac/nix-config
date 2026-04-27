@@ -30,7 +30,11 @@
         labels = [
           "${system}:host"
           "${hostName}:host"
+          "docker:docker://node:20-bookworm"
+          "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-22.04"
         ];
+
+        settings.container.docker_host = "-";
       };
 
       sops.secrets."git-actions-runner/runnerRegistrationToken" = {
