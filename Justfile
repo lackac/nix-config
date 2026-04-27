@@ -25,6 +25,18 @@ deploy-all:
 build host:
   colmena apply build --on {{host}} --build-on-target
 
+log host target="":
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  if [[ -z "{{target}}" ]]; then
+    ssh -t -- "{{host}}" sudo journalctl -f
+  elif [[ "{{target}}" == /* ]]; then
+    ssh -t -- "{{host}}" sudo tail -F "{{target}}"
+  else
+    ssh -t -- "{{host}}" sudo journalctl -fu "{{target}}"
+  fi
+
 provision host ip:
   nix run nixpkgs#nixos-anywhere -- --flake .#{{host}} root@{{ip}}
 
