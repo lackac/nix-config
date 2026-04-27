@@ -22,6 +22,7 @@ let
     git-actions-runner
     mc
     garage
+    livebook
     caddy
     tailscale
   ];
