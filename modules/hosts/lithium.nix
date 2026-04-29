@@ -20,6 +20,7 @@ let
     onePassword
     onePasswordSshAgent
     tailscale
+    local-development-proxy
     units
   ];
 
