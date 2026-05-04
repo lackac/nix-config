@@ -6,6 +6,43 @@ fi
 
 confirmed=false
 target_session=""
+target_specified=false
+
+strip_ansi() {
+  local value="$1"
+  local escape=$'\033'
+
+  while [[ "$value" =~ $escape\[[0-9\;]*m ]]; do
+    value="${value/${BASH_REMATCH[0]}/}"
+  done
+
+  printf '%s\n' "$value"
+}
+
+session_from_sesh_entry() {
+  local selected_entry="$1"
+  local selected_clean
+  local listed_entry
+  local listed_clean
+  local session_name
+
+  selected_clean="$(strip_ansi "$selected_entry")"
+
+  while IFS= read -r listed_entry; do
+    listed_clean="$(strip_ansi "$listed_entry")"
+    if [[ "$listed_clean" != "$selected_clean" ]]; then
+      continue
+    fi
+
+    session_name="${listed_clean#* }"
+    if [[ "$session_name" != "$listed_clean" ]]; then
+      printf '%s\n' "$session_name"
+    fi
+    return 0
+  done < <(sesh list --icons -t)
+
+  return 1
+}
 
 while (($# > 0)); do
   case "$1" in
@@ -18,7 +55,17 @@ while (($# > 0)); do
       printf 'tmux-session-kill: missing value for --session\n' >&2
       exit 1
     fi
+    target_specified=true
     target_session="$2"
+    shift 2
+    ;;
+  --sesh-entry)
+    if (($# < 2)); then
+      printf 'tmux-session-kill: missing value for --sesh-entry\n' >&2
+      exit 1
+    fi
+    target_specified=true
+    target_session="$(session_from_sesh_entry "$2" || true)"
     shift 2
     ;;
   *)
@@ -27,6 +74,10 @@ while (($# > 0)); do
     ;;
   esac
 done
+
+if [[ -z "$target_session" ]] && [[ "$target_specified" == "true" ]]; then
+  exit 0
+fi
 
 if [[ -z "$target_session" ]]; then
   target_session="$(tmux display-message -p '#S' 2>/dev/null || true)"
@@ -84,7 +135,10 @@ is_risky_command() {
 }
 
 shell_quote() {
-  printf '%q' "$1"
+  local value="$1"
+
+  value="${value//\'/\'\\\'\'}"
+  printf "'%s'" "$value"
 }
 
 load_process_tree() {
@@ -166,6 +220,11 @@ switch_away_from_session() {
   local session_name="$1"
   local current_session
 
+  current_session="$(tmux display-message -p '#S' 2>/dev/null || true)"
+  if [[ "$current_session" != "$session_name" ]]; then
+    return 0
+  fi
+
   tmux switch-client -l 2>/dev/null || true
   current_session="$(tmux display-message -p '#S' 2>/dev/null || true)"
   if [[ "$current_session" == "$session_name" ]] && [[ "$session_name" != "main" ]]; then
@@ -177,9 +236,11 @@ prompt_for_confirmation() {
   local session_name="$1"
   local summary="$2"
   local quoted_session
+  local confirmed_command
 
   quoted_session="$(shell_quote "$session_name")"
-  tmux confirm-before -p "Kill session $session_name? $summary" "run-shell \"tmux-session-kill --session $quoted_session --confirmed\""
+  confirmed_command="run-shell -b \"tmux-session-kill --session $quoted_session --confirmed\""
+  tmux confirm-before -b -p "Kill session $session_name? $summary" "$confirmed_command"
 }
 
 kill_session() {

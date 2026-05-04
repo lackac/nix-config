@@ -79,7 +79,7 @@
               --bind 'ctrl-t:change-prompt(🪟  )+change-nth(-1)+reload(sesh list --icons -t)' \
               --bind 'ctrl-g:change-prompt(⚙️  )+change-nth(-1)+reload(sesh list --icons -c)' \
               --bind 'ctrl-d:change-prompt(📁  )+change-nth(-1)+reload(sesh list --icons -z)' \
-              --bind 'ctrl-x:execute(tmux-session-kill --session {2..})+change-prompt(⚡  )+change-nth(-1)+reload(sesh list --icons)' \
+              --bind 'ctrl-x:execute(tmux-session-kill --sesh-entry {})+change-prompt(⚡  )+change-nth(-1)+reload(sesh list --icons)' \
               --bind 'ctrl-p:change-prompt(⚡  )+change-nth(..)' \
               --bind 'ctrl-b:change-prompt(⚡  )+change-nth(-1)' \
               --preview-window 'right:55%' \
