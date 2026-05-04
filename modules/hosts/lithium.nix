@@ -19,6 +19,7 @@ let
     keyboard-layout
     onePassword
     onePasswordSshAgent
+    ollama
     tailscale
     local-development-proxy
     units
