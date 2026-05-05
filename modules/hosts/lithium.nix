@@ -11,6 +11,7 @@ let
     common
     desktop
     disable-hotkeys
+    caddy
     fonts
     games
     hammerspoon

@@ -1,14 +1,22 @@
-{ lib, ... }:
+{
+  lib,
+  ...
+}:
+let
+  caddyWithDnsimple =
+    pkgs:
+    pkgs.caddy.withPlugins {
+      plugins = [ "github.com/caddy-dns/dnsimple@v0.0.0-20251214142352-69317c3989f0" ];
+      hash = "sha256-fyP9Zom08m3tpQbaGUTl+zDYGneyrxt1gTeu5VQ/hFY=";
+    };
+in
 {
   flake.modules.nixos.caddy =
     { pkgs, config, ... }:
     {
       services.caddy = {
         enable = true;
-        package = pkgs.caddy.withPlugins {
-          plugins = [ "github.com/caddy-dns/dnsimple@v0.0.0-20251214142352-69317c3989f0" ];
-          hash = "sha256-fyP9Zom08m3tpQbaGUTl+zDYGneyrxt1gTeu5VQ/hFY=";
-        };
+        package = caddyWithDnsimple pkgs;
 
         email = "admin@lackac.hu";
         globalConfig = ''
@@ -34,6 +42,63 @@
       systemd.services.caddy.serviceConfig.EnvironmentFile = config.sops.templates."caddy/env".path;
     };
 
+  flake.modules.darwin.caddy =
+    { config, pkgs, ... }:
+    let
+      caddyPackage = caddyWithDnsimple pkgs;
+    in
+    {
+      sops = {
+        secrets."dnsimple/token".sopsFile = ../../secrets/common.yaml;
+
+        templates."caddy/env".content = ''
+          DNSIMPLE_API_ACCESS_TOKEN=${config.sops.placeholder."dnsimple/token"}
+        '';
+      };
+
+      environment.systemPackages = [
+        caddyPackage
+      ];
+
+      environment.etc."caddy/darwin.Caddyfile".text = ''
+        {
+          local_certs
+        }
+
+        import /etc/caddy/local.d/*.caddy
+      '';
+
+      launchd.daemons.caddy = {
+        command = ''
+          /bin/sh -c 'set -a; . ${
+            config.sops.templates."caddy/env".path
+          }; set +a; exec ${caddyPackage}/bin/caddy run --config /etc/caddy/darwin.Caddyfile --adapter caddyfile'
+        '';
+        serviceConfig = {
+          RunAtLoad = true;
+          KeepAlive = true;
+          StandardOutPath = "/var/log/caddy.log";
+          StandardErrorPath = "/var/log/caddy.log";
+        };
+      };
+
+      launchd.daemons.caddy.environment = {
+        HOME = "/var/lib/caddy";
+        XDG_DATA_HOME = "/var/lib/caddy/data";
+        XDG_CONFIG_HOME = "/var/lib/caddy/config";
+        XDG_CACHE_HOME = "/var/lib/caddy/cache";
+      };
+
+      system.activationScripts.postActivation.text = lib.mkAfter ''
+        echo "Setting up /var/lib/caddy..."
+        mkdir -p /var/lib/caddy/data /var/lib/caddy/config /var/lib/caddy/cache
+        chmod 700 /var/lib/caddy
+        chmod 700 /var/lib/caddy/data
+        chmod 700 /var/lib/caddy/config
+        chmod 700 /var/lib/caddy/cache
+      '';
+    };
+
   flake.modules.darwin.local-development-proxy =
     { pkgs, ... }:
     {
@@ -44,17 +109,8 @@
       };
 
       environment.systemPackages = [
-        pkgs.caddy
         pkgs.dnsmasq
       ];
-
-      environment.etc."caddy/local-development.Caddyfile".text = ''
-        {
-          local_certs
-        }
-
-        import /etc/caddy/local.d/*.caddy
-      '';
 
       environment.etc."caddy/local.d/placeholder.caddy".text = ''
         # Add project-specific local development routes in this directory.
@@ -64,32 +120,6 @@
         #   tls internal
         #   reverse_proxy 127.0.0.1:5000
         # }
-      '';
-
-      launchd.daemons.caddy-local-development = {
-        command = "${pkgs.caddy}/bin/caddy run --config /etc/caddy/local-development.Caddyfile --adapter caddyfile";
-        serviceConfig = {
-          RunAtLoad = true;
-          KeepAlive = true;
-          StandardOutPath = "/var/log/caddy-local-development.log";
-          StandardErrorPath = "/var/log/caddy-local-development.log";
-        };
-      };
-
-      launchd.daemons.caddy-local-development.environment = {
-        HOME = "/var/lib/caddy";
-        XDG_DATA_HOME = "/var/lib/caddy/data";
-        XDG_CONFIG_HOME = "/var/lib/caddy/config";
-        XDG_CACHE_HOME = "/var/lib/caddy/cache";
-      };
-
-      system.activationScripts.postActivation.text = lib.mkAfter ''
-        echo "Setting up /var/lib/caddy for local development proxy..."
-        mkdir -p /var/lib/caddy/data /var/lib/caddy/config /var/lib/caddy/cache
-        chmod 700 /var/lib/caddy
-        chmod 700 /var/lib/caddy/data
-        chmod 700 /var/lib/caddy/config
-        chmod 700 /var/lib/caddy/cache
       '';
     };
 }
