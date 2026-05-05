@@ -18,8 +18,10 @@ in
           inherit (config) vars;
         };
 
+        sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+
         users.${vars.username} =
-          { ... }:
+          { config, ... }:
           {
             imports = [
               hmModules.shell
@@ -36,6 +38,8 @@ in
               homeDirectory = "/Users/${vars.username}";
               stateVersion = "25.11";
             };
+
+            sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
           };
       };
     };

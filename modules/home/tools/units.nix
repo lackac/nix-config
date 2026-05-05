@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   ...
 }:
@@ -59,10 +58,6 @@ in
       refreshCurrency = mkRefreshCurrency pkgs;
     in
     {
-      imports = [ inputs.sops-nix.darwinModules.sops ];
-
-      home-manager.sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
-
       home-manager.users.${vars.username} =
         { config, ... }:
         let
@@ -71,7 +66,6 @@ in
         {
           sops = {
             defaultSopsFile = lithiumSecretsFile;
-            age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
             secrets = lib.mkIf lithiumHasUnitsSecret {
               "units/openexchangerates-app-id".path = "${config.xdg.configHome}/units/openexchangerates-app-id";
             };

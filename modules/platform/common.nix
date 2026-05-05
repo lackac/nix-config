@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
   inherit (config) vars;
 
@@ -63,45 +68,51 @@ in
 
   flake.modules.darwin.common =
     { pkgs, lib, ... }:
-    lib.mkMerge [
-      (commonBase pkgs)
-      {
-        # Determinate Nix owns the daemon.
-        nix.enable = false;
+    {
+      imports = [ inputs.sops-nix.darwinModules.sops ];
 
-        # Workaround: https://github.com/NixOS/nix/issues/7273
-        nix.settings.auto-optimise-store = false;
+      config = lib.mkMerge [
+        (commonBase pkgs)
+        {
+          # Determinate Nix owns the daemon.
+          nix.enable = false;
 
-        nix.gc.automatic = false;
+          sops.age.keyFile = "/Users/${vars.username}/.config/sops/age/keys.txt";
 
-        nix.settings = {
-          trusted-users = [ vars.username ];
-          substituters = [ "https://nix-community.cachix.org" ];
-          trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          # Workaround: https://github.com/NixOS/nix/issues/7273
+          nix.settings.auto-optimise-store = false;
+
+          nix.gc.automatic = false;
+
+          nix.settings = {
+            trusted-users = [ vars.username ];
+            substituters = [ "https://nix-community.cachix.org" ];
+            trusted-public-keys = [
+              "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+            ];
+            builders-use-substitutes = true;
+          };
+
+          environment.systemPackages = with pkgs; [
+            m-cli
+            ruby
+            python3
           ];
-          builders-use-substitutes = true;
-        };
 
-        environment.systemPackages = with pkgs; [
-          m-cli
-          ruby
-          python3
-        ];
+          users.users.${vars.username} = {
+            home = "/Users/${vars.username}";
+          };
 
-        users.users.${vars.username} = {
-          home = "/Users/${vars.username}";
-        };
+          services.openssh = {
+            extraConfig = ''
+              PasswordAuthentication no
+              KbdInteractiveAuthentication no
+            '';
+          };
 
-        services.openssh = {
-          extraConfig = ''
-            PasswordAuthentication no
-            KbdInteractiveAuthentication no
-          '';
-        };
-
-        programs.zsh.enable = true;
-        environment.shells = [ pkgs.zsh ];
-      }
-    ];
+          programs.zsh.enable = true;
+          environment.shells = [ pkgs.zsh ];
+        }
+      ];
+    };
 }
