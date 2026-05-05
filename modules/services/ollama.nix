@@ -12,6 +12,9 @@ in
   flake.modules.homeManager.ollama =
     { ... }:
     {
-      services.ollama.enable = true;
+      services.ollama = {
+        enable = true;
+        host = "127.0.0.1";
+      };
     };
 }

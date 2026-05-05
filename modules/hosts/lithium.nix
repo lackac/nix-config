@@ -21,6 +21,7 @@ let
     onePassword
     onePasswordSshAgent
     ollama
+    ollama-tailnet-proxy
     tailscale
     local-development-proxy
     units
