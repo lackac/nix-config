@@ -11,14 +11,14 @@
         settings = {
           default_session = {
             preview_command = "tree -L 1 -C --dirsfirst -a {}";
-            startup_command = "tmux rename-window ' 󰻹 󰚩'; tmux new-window -n '󰞷'; tmux select-window -t ' 󰻹 󰚩'; tmux-session-rename || true; clear; opencode-session";
+            startup_command = "tmux rename-window ' 󰻹 󰚩'; tmux new-window -n '󰞷'; tmux select-window -t ' 󰻹 󰚩'; tmux-session-rename || true; clear; opencode-session; exec $SHELL -i";
           };
 
           session = [
             {
               name = "main";
               path = "~";
-              startup_command = "tmux rename-window '󰞷'; clear";
+              startup_command = "tmux rename-window '󰞷'; clear; exec $SHELL -i";
             }
           ];
         };
