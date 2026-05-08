@@ -31,6 +31,7 @@
 
         imagemagick
         pngpaste
+        terminal-notifier
 
         awscli2
         croc
