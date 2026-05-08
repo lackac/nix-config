@@ -50,6 +50,7 @@
           ".tags[0-9]"
           "devlog.md"
           ".private-journal"
+          ".sisyphus/"
           ".stignore"
           ".stfolder"
         ];
