@@ -17,6 +17,7 @@ in
         git
         neovim
         opencode
+        package-runners
         ssh
         tmux
         tealdeer
