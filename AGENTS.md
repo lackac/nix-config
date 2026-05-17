@@ -28,6 +28,9 @@ brainstorming and execution. Long-lived operational guidance belongs in
 
 ## Build/Test Commands
 
+- Do not run `just darwin-check`, `darwin-rebuild check`, or any other Darwin
+  check/rebuild command unless the user explicitly requests it. These commands
+  may require `sudo` and can run activation steps on the current machine.
 - `just` - List all available commands
 - `just fmt` - Format all Nix files
 - `just check` - Run `nix flake check`
