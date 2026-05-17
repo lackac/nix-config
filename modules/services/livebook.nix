@@ -7,8 +7,11 @@ let
 in
 {
   flake.modules.nixos.livebook =
-    { config, ... }:
+    { config, vars, ... }:
     {
+      users.groups.livebook-data = { };
+      users.users.${vars.username}.extraGroups = [ "livebook-data" ];
+
       sops.secrets."livebook/password".sopsFile = ../../secrets/boron.yaml;
       sops.secrets."livebook/secretKeyBase".sopsFile = ../../secrets/boron.yaml;
       sops.secrets."livebook/cookie".sopsFile = ../../secrets/boron.yaml;
@@ -23,7 +26,7 @@ in
       };
 
       systemd.tmpfiles.rules = [
-        "d /var/lib/${stateDirectory} 0750 root root - -"
+        "d /var/lib/${stateDirectory} 2770 root livebook-data - -"
       ];
 
       virtualisation.oci-containers.containers.livebook = {
