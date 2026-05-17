@@ -30,6 +30,7 @@
 
         brews = [
           "mas"
+          "terminal-notifier"
         ];
 
         casks = [
