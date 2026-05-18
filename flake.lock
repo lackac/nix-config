@@ -795,11 +795,11 @@
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
-        "lastModified": 1778146082,
-        "narHash": "sha256-SuSBsYqlAE7r8+C8DQyoGBS7+ljocUoxpUF8R2HwzqU=",
+        "lastModified": 1779117608,
+        "narHash": "sha256-9knQwnoLKsrWuPXK4PaZFAdsulGzGK5q0YebnakMgsU=",
         "owner": "lackac",
         "repo": "oc-config",
-        "rev": "be4a1cdc21fe9d0c2e3d601e19513178aac96858",
+        "rev": "668c0565883e46ae48fbf8401f1641b9e2171fc7",
         "type": "github"
       },
       "original": {
@@ -811,18 +811,20 @@
     "oh-my-openagent": {
       "flake": false,
       "locked": {
-        "lastModified": 1778123020,
-        "narHash": "sha256-FtI21TOILo7OiBGs4lGTcnPn2mlFK2h/4ip/7uYQqnY=",
-        "owner": "code-yeongyu",
-        "repo": "oh-my-openagent",
-        "rev": "10f9559cccbec819e1751cdf3cf5bce4268d9f86",
-        "type": "github"
+        "lastModified": 1779096660,
+        "narHash": "sha256-uiEDxN+F4C/FRlE7I2BMQ9MVKXxj1BF55vJzjNo3r+4=",
+        "ref": "refs/heads/dev",
+        "rev": "f473379745a20cd01e5e407a7911ecf37779e3a7",
+        "revCount": 6381,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/code-yeongyu/oh-my-openagent"
       },
       "original": {
-        "owner": "code-yeongyu",
         "ref": "dev",
-        "repo": "oh-my-openagent",
-        "type": "github"
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/code-yeongyu/oh-my-openagent"
       }
     },
     "opencode": {
@@ -833,11 +835,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778114037,
-        "narHash": "sha256-8M7IaLDgh/vapPV38ml/cyxsu77E2SxA4eYP+PuUnEM=",
+        "lastModified": 1779039880,
+        "narHash": "sha256-aCoajfdfNsEq5YGFwX+YKkC6Bo19f34BbKt3wJ1FNmA=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "277f1c71486ed4795875d09bb5c0bbe504f06dd5",
+        "rev": "2b92c5677e830e95d34fc3d5664a69297d2d0b51",
         "type": "github"
       },
       "original": {
