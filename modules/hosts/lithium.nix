@@ -22,6 +22,7 @@ let
     onePasswordSshAgent
     ollama
     ollama-tailnet-proxy
+    postgres
     tailscale
     local-development-proxy
     units
