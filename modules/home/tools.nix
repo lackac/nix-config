@@ -18,6 +18,7 @@ in
         neovim
         opencode
         package-runners
+        kickstart
         ssh
         tmux
         tealdeer

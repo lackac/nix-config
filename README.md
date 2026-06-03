@@ -12,6 +12,20 @@ Personal dendritic Nix flake for macOS and NixOS hosts.
 
 See `Justfile` for the full command surface.
 
+## Project Templates
+
+Bootstrap a project flake with this config's pinned `nixpkgs` input:
+
+```bash
+kickstart elixir my_app
+kickstart elixir my_app -- --module MyApp
+kickstart phoenix my_app
+kickstart phoenix my_app -- --no-ecto
+```
+
+Run `kickstart sync-nixpkgs` inside a flake repo to realign its `nixpkgs` lock
+with this config's pinned input.
+
 ## Repo Map
 
 - `modules/`: flake-parts modules (hosts, platform, packages, home, services).
