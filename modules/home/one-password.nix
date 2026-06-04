@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, ... }:
 let
   inherit (config) vars;
 in
@@ -30,7 +30,7 @@ in
     {
       home.sessionVariables.SSH_AUTH_SOCK = opAgentSock;
 
-      programs.ssh.matchBlocks."*".identityAgent = opAgentSockSsh;
+      programs.ssh.settings."*".IdentityAgent = opAgentSockSsh;
 
       programs.bash.bashrcExtra = lib.mkAfter ''
         if [ -f "${opPluginsPath}" ]; then

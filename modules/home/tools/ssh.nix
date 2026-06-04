@@ -25,12 +25,12 @@
           UseKeychain = "yes";
         };
 
-        matchBlocks."*" = {
-          serverAliveInterval = 60;
-          serverAliveCountMax = 3;
-          controlMaster = "auto";
-          controlPath = "/tmp/%r@%h:%p";
-          controlPersist = "yes";
+        settings."*" = {
+          ServerAliveInterval = 60;
+          ServerAliveCountMax = 3;
+          ControlMaster = "auto";
+          ControlPath = "/tmp/%r@%h:%p";
+          ControlPersist = "yes";
         };
       };
     };
