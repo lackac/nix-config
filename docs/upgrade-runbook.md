@@ -103,6 +103,15 @@ just darwin-switch beryllium
 just darwin-switch lithium
 ```
 
+When the Determinate Nix daemon itself is due for an upgrade, use the explicit
+maintenance recipe instead. This upgrades the active Nix installation before
+applying the Darwin configuration:
+
+```sh
+just darwin-upgrade beryllium
+just darwin-upgrade lithium
+```
+
 ### Validate
 
 After each Darwin switch, confirm:
@@ -119,6 +128,7 @@ Notes:
 
 - `docs/bootstrap-darwin.md` covers bootstrap and interactive setup details; do not duplicate them here.
 - Homebrew activation can perform live updates, so expect Darwin upgrades to be less deterministic than pure Nix evaluation.
+- Determinate Nix upgrades are not driven by `nix flake update`; run `just darwin-upgrade <host>` when `determinate-nixd status` reports a newer version.
 
 ## 7) NixOS track
 

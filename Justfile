@@ -43,6 +43,10 @@ provision host ip:
 darwin-switch host=`scutil --get LocalHostName 2>/dev/null || hostname -s`:
   sudo darwin-rebuild switch --flake .#{{host}}
 
+darwin-upgrade host=`scutil --get LocalHostName 2>/dev/null || hostname -s`:
+  sudo determinate-nixd upgrade
+  sudo darwin-rebuild switch --flake .#{{host}}
+
 darwin-check host=`scutil --get LocalHostName 2>/dev/null || hostname -s`:
   sudo darwin-rebuild check --flake .#{{host}}
 
