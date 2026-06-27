@@ -69,13 +69,25 @@ in
   flake.modules.darwin.common =
     { pkgs, lib, ... }:
     {
-      imports = [ inputs.sops-nix.darwinModules.sops ];
+      imports = [
+        inputs.determinate.darwinModules.default
+        inputs.sops-nix.darwinModules.sops
+      ];
 
       config = lib.mkMerge [
         (commonBase pkgs)
         {
-          # Determinate Nix owns the daemon.
-          nix.enable = false;
+          determinateNix = {
+            enable = true;
+            customSettings = {
+              extra-trusted-users = [ vars.username ];
+              extra-substituters = [ "https://nix-community.cachix.org" ];
+              extra-trusted-public-keys = [
+                "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+              ];
+              builders-use-substitutes = true;
+            };
+          };
 
           sops.age.keyFile = "/Users/${vars.username}/.config/sops/age/keys.txt";
 
@@ -83,15 +95,6 @@ in
           nix.settings.auto-optimise-store = false;
 
           nix.gc.automatic = false;
-
-          nix.settings = {
-            trusted-users = [ vars.username ];
-            substituters = [ "https://nix-community.cachix.org" ];
-            trusted-public-keys = [
-              "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            ];
-            builders-use-substitutes = true;
-          };
 
           environment.systemPackages = with pkgs; [
             m-cli
