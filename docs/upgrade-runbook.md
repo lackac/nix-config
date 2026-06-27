@@ -21,7 +21,6 @@ It focuses on routine input updates and staged rollouts across existing hosts. I
 
 ### NixOS hosts
 
-- Lower-risk general hosts: `neon`
 - Stateful or service-heavy hosts: `carbon`, `boron`
 
 ### Separate lane
@@ -70,16 +69,14 @@ Use this order by default:
 1. Shared evaluation
 2. `beryllium`
 3. `lithium`
-4. `neon`
-5. `carbon`
-6. `boron`
-7. `oxygen` later, as a separate maintenance task
+4. `carbon`
+5. `boron`
+6. `oxygen` later, as a separate maintenance task
 
 Rationale:
 
 - Darwin has weaker rollback than NixOS, so upgrade it early but in small, local steps.
 - `beryllium` is the lighter Darwin canary.
-- `neon` is the first NixOS canary and must pass before `carbon` or `boron` begin.
 - `carbon` and `boron` carry more service state and should only move after earlier phases pass.
 - `oxygen` follows its own cadence and should not block normal fleet updates.
 
@@ -137,7 +134,6 @@ Run NixOS upgrades one host at a time.
 ### Dry-run
 
 ```sh
-just deploy-dry neon
 just deploy-dry carbon
 just deploy-dry boron
 ```
@@ -145,7 +141,6 @@ just deploy-dry boron
 ### Apply
 
 ```sh
-just deploy neon
 just deploy carbon
 just deploy boron
 ```

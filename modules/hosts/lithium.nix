@@ -46,7 +46,6 @@ let
         "plex"
         "prusaslicer"
         "slack"
-        "utm"
         "viscosity"
       ];
     };

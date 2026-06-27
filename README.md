@@ -36,4 +36,4 @@ with this config's pinned input.
 ## Hosts
 
 - `lithium`: primary darwin host.
-- `carbon`, `boron`, `neon`, `oxygen`: NixOS hosts.
+- `carbon`, `boron`, `oxygen`: NixOS hosts.
