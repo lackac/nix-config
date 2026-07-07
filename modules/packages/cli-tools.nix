@@ -14,6 +14,7 @@
         just
         ripgrep
         sad
+        yt-dlp
         yq-go
 
         gnupg
