@@ -85,4 +85,4 @@ if [[ -n "${TMUX:-}" ]]; then
   fi
 fi
 
-exec oh-my-openagent --port "$OPENCODE_PORT" "${opencode_args[@]}"
+exec opencode --port "$OPENCODE_PORT" "${opencode_args[@]}"
