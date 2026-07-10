@@ -9,7 +9,6 @@ let
 
   oxygenAspects = with inputs.self.modules.nixos; [
     common
-    server
     secrets
 
     tailscale
@@ -26,6 +25,8 @@ let
     }:
     {
       imports = with inputs.nixos-raspberrypi.nixosModules; [
+        inputs.sops-nix.nixosModules.sops
+        inputs.determinate.nixosModules.default
         sd-image
         nixpkgs-rpi
         raspberry-pi-4.base
@@ -43,6 +44,14 @@ let
       system.stateVersion = "25.11";
       sops.defaultSopsFile = ../../secrets/oxygen.yaml;
       hardware.enableAllHardware = lib.mkForce false;
+
+      networking.firewall.enable = true;
+
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
 
       networking.wireless = {
         enable = true;
@@ -95,15 +104,7 @@ let
       };
     };
 
-  oxygenModules = [
-    {
-      disabledModules = [
-        "rename.nix"
-      ];
-    }
-  ]
-  ++ oxygenAspects
-  ++ [ oxygenInline ];
+  oxygenModules = oxygenAspects ++ [ oxygenInline ];
 in
 {
   flake.nixosConfigurations.oxygen = inputs.nixos-raspberrypi.lib.nixosSystem {
