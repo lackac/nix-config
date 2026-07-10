@@ -8,6 +8,7 @@
         git-lfs
         gh
         forgejo-cli
+        jujutsu
       ];
 
       home.shellAliases = {
