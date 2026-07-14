@@ -16,8 +16,8 @@ in
       script = pkgs.writeShellApplication {
         name = "kickstart";
         runtimeInputs = [
-          pkgs.git
           pkgs.jq
+          pkgs.jujutsu
         ];
         text = scriptText;
       };

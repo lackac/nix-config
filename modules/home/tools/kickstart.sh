@@ -130,27 +130,24 @@ if [[ -e flake.nix ]]; then
   exit 1
 fi
 
-if [[ ! -d .git ]]; then
-  git init
-fi
-
-if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
-  git commit --allow-empty -m "chore: inception"
+if [[ ! -d .jj ]]; then
+  if [[ -d .git ]]; then
+    jj git init --git-repo=.
+  else
+    jj git init --colocate
+  fi
 fi
 
 nix flake init -t "${template_flake}#${template}"
-git reset -q -- .envrc 2>/dev/null || true
 sync_nixpkgs
-git add .
-git reset -q -- .envrc 2>/dev/null || true
-git commit -m "chore(env): bootstrap nix flake"
+jj commit -m "chore(env): bootstrap nix flake"
 
 if [[ "$generator_requested" == "true" ]]; then
   generator_command_text="$(generator_command "${generator_args[@]}")"
   run_generator "${generator_args[@]}"
-  git add .
-  git reset -q -- .envrc 2>/dev/null || true
-  git commit \
+  jj commit \
     -m "chore: run project generator" \
     -m "$(printf 'Generator command:\n\n    %s' "$generator_command_text")"
 fi
+
+jj bookmark set main -r @-

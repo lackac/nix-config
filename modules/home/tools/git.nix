@@ -7,6 +7,7 @@
         git-lfs
         gh
         forgejo-cli
+        jjui
       ];
 
       home.shellAliases = {
@@ -144,6 +145,12 @@
           ui = {
             pager = [ "hunk" "pager" ];
             diff-formatter = ":git";
+          };
+
+          signing = {
+            behavior = "own";
+            backend = "ssh";
+            key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF5ifzgwgrEKpUsQpIVw2vraFWQ/oqSgljIKUaP06QS6 git-signing";
           };
         };
       };

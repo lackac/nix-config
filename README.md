@@ -14,12 +14,14 @@ See `Justfile` for the full command surface.
 
 ## Project Templates
 
-Bootstrap a project flake with this config's pinned `nixpkgs` input:
+Bootstrap a project flake in a colocated Jujutsu/Git repository with this config's
+pinned `nixpkgs` input. Include `--` to run the template's project generator;
+without it, `kickstart` only creates the flake:
 
 ```bash
-kickstart elixir my_app
+kickstart elixir my_app --
 kickstart elixir my_app -- --module MyApp
-kickstart phoenix my_app
+kickstart phoenix my_app --
 kickstart phoenix my_app -- --no-ecto
 ```
 
