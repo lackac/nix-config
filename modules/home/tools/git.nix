@@ -4,11 +4,9 @@
     { vars, pkgs, ... }:
     {
       home.packages = with pkgs; [
-        delta
         git-lfs
         gh
         forgejo-cli
-        jujutsu
       ];
 
       home.shellAliases = {
@@ -55,6 +53,7 @@
           ".sisyphus/"
           ".stignore"
           ".stfolder"
+          ".jj/"
         ];
 
         settings = {
@@ -106,16 +105,7 @@
             autostash = true;
           };
 
-          core.pager = "delta";
-          interactive.diffFilter = "delta --color-only";
-
-          delta = {
-            navigate = true;
-            diff-so-fancy = true;
-            line-numbers = true;
-            true-color = "always";
-            detect-dark-light = "auto";
-          };
+          core.pager = "hunk pager";
 
           diff = {
             algorithm = "histogram";
@@ -140,6 +130,21 @@
 
           git.autoFetch = false;
           confirmOnQuit = false;
+        };
+      };
+
+      programs.jujutsu = {
+        enable = true;
+        settings = {
+          user = {
+            name = vars.fullName;
+            email = vars.email;
+          };
+
+          ui = {
+            pager = [ "hunk" "pager" ];
+            diff-formatter = ":git";
+          };
         };
       };
     };
