@@ -142,6 +142,16 @@
             email = vars.email;
           };
 
+          revset-aliases = {
+            "closest_merge(to)" = "heads(::to & merges())";
+          };
+
+          aliases = {
+            stack = [ "rebase" "--after" "trunk()" "--before" "closest_merge(@)" "--revision" ];
+            stage = [ "stack" "closest_merge(@)+:: ~ empty()" ];
+            restack = [ "rebase" "--onto" "trunk()" "--source" "roots(trunk()..) & mutable()" "--simplify-parents" ];
+          };
+
           ui = {
             pager = [ "hunk" "pager" ];
             diff-formatter = ":git";
