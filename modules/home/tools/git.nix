@@ -154,5 +154,10 @@
           };
         };
       };
+
+      xdg.configFile."hunk/config.toml".text = ''
+        theme = "solarized-light"
+        menu_bar = false
+      '';
     };
 }
