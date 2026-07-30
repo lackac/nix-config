@@ -4,6 +4,7 @@
     { vars, pkgs, ... }:
     {
       home.packages = with pkgs; [
+        delta
         git-lfs
         gh
         forgejo-cli
@@ -24,6 +25,7 @@
         gpu = "git push -u origin";
         gll = "git pull";
         gsps = "git stash && git pull && git stash pop";
+        review = "tuicr -w";
       };
 
       programs.git = {
@@ -106,7 +108,16 @@
             autostash = true;
           };
 
-          core.pager = "hunk pager";
+          core.pager = "delta";
+          interactive.diffFilter = "delta --color-only";
+
+          delta = {
+            navigate = true;
+            diff-so-fancy = true;
+            line-numbers = true;
+            true-color = "always";
+            detect-dark-light = "auto";
+          };
 
           diff = {
             algorithm = "histogram";
@@ -153,7 +164,7 @@
           };
 
           ui = {
-            pager = [ "hunk" "pager" ];
+            pager = "delta";
             diff-formatter = ":git";
           };
 
@@ -165,9 +176,8 @@
         };
       };
 
-      xdg.configFile."hunk/config.toml".text = ''
+      xdg.configFile."tuicr/config.toml".text = ''
         theme = "solarized-light"
-        menu_bar = false
       '';
     };
 }
