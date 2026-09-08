@@ -21,7 +21,7 @@ in
         sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
 
         users.${vars.username} =
-          { config, ... }:
+          { config, lib, ... }:
           {
             imports = [
               hmModules.shell
@@ -40,6 +40,16 @@ in
             };
 
             sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+
+            # Home Manager already loads this agent; restarting it avoids sops-nix's
+            # immediate bootout/bootstrap cycle, which can race on macOS 26.
+            home.activation.sops-nix = lib.mkIf (config.sops.secrets != { }) (
+              lib.mkForce (
+                lib.hm.dag.entryAfter [ "setupLaunchAgents" ] ''
+                  /bin/launchctl kickstart -k "gui/$UID/org.nix-community.home.sops-nix"
+                ''
+              )
+            );
           };
       };
     };

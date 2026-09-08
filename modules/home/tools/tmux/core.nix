@@ -3,7 +3,7 @@
   flake.modules.homeManager.tmux-core =
     { pkgs, ... }:
     let
-      isDarwin = pkgs.stdenv.isDarwin;
+      isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
     in
     {
       programs.tmux = {

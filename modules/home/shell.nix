@@ -5,7 +5,7 @@
     let
       localBin = "${config.home.homeDirectory}/.local/bin";
       homebrewFallbackPath = "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin";
-      isDarwin = pkgs.stdenv.isDarwin;
+      isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
     in
     {
       home.shellAliases = {

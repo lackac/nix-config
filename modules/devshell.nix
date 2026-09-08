@@ -31,7 +31,7 @@
             just
             pwgen
           ])
-          ++ lib.optionals pkgs.stdenv.isDarwin [
+          ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
             inputs.nix-darwin.packages.${system}.darwin-rebuild
           ];
       };
