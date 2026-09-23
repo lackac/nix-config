@@ -84,8 +84,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    oc-config = {
-      url = "github:lackac/oc-config";
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

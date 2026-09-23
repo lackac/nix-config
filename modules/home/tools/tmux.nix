@@ -10,7 +10,6 @@ in
         tmux-core
         tmux-statusline
         tmux-sesh
-        tmux-opencode-session
         tmux-session-kill
         tmux-session-rename
         tmux-autostart

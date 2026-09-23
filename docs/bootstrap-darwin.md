@@ -168,7 +168,7 @@ git clone git@github.com:lackac/hs-config-private.git ~/.hammerspoon/private
 # Neovim config (nvf-based)
 git clone git@github.com:lackac/nvf-config.git ~/Code/lackac/nvf-config
 
-# OpenCode config (if applicable)
+# OpenCode config (required before Home Manager activation)
 git clone git@github.com:lackac/oc-config.git ~/Code/lackac/oc-config
 ```
 
