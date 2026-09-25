@@ -20,6 +20,7 @@ let
     keyboard-layout
     onePassword
     onePasswordSshAgent
+    opencode-desktop
     ollama
     ollama-tailnet-proxy
     postgres

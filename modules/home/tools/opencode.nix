@@ -1,5 +1,13 @@
 { inputs, ... }:
 {
+  flake.modules.darwin.opencode-desktop =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2-desktop
+      ];
+    };
+
   flake.modules.homeManager.opencode =
     {
       config,

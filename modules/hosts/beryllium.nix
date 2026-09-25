@@ -22,6 +22,7 @@ let
     home
     keyboard-layout
     onePassword
+    opencode-desktop
     tailscale
   ];
 
