@@ -93,6 +93,11 @@
       url = "github:lackac/cli-toolbox";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kickstart = {
+      url = "github:lackac/kickstart";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

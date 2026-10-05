@@ -14,19 +14,17 @@ See `Justfile` for the full command surface.
 
 ## Project Templates
 
-Bootstrap a project flake in a colocated Jujutsu/Git repository with this config's
-pinned `nixpkgs` input. Include `--` to run the template's project generator;
-without it, `kickstart` only creates the flake:
+Use `kickstart` to create a Nix, Elixir, or Phoenix project with a pinned Nix shell
+and colocated Jujutsu/Git repository. Opt into development tooling with `--agentic`:
 
 ```bash
+kickstart nix my-project
 kickstart elixir my_app --
-kickstart elixir my_app -- --module MyApp
-kickstart phoenix my_app --
-kickstart phoenix my_app -- --no-ecto
+kickstart phoenix my_app --agentic -- --no-ecto
 ```
 
-Run `kickstart sync-nixpkgs` inside a flake repo to realign its `nixpkgs` lock
-with this config's pinned input.
+Kickstart is maintained in its own [repository](https://git.lackac.hu/lackac/kickstart).
+Its flake input follows this configuration's nixpkgs.
 
 ## Repo Map
 
