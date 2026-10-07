@@ -26,6 +26,14 @@ kickstart phoenix my_app --agentic -- --no-ecto
 Kickstart is maintained in its own [repository](https://git.lackac.hu/lackac/kickstart).
 Its flake input follows this configuration's nixpkgs.
 
+## Local Narration
+
+Apple Silicon Macs include `kokoro-narrate` from CLI toolbox, a local,
+Metal-accelerated English narration command. It defaults to Emma's British voice
+and writes WAV files. See the
+[usage guide](https://git.lackac.hu/lackac/cli-toolbox/src/branch/main/pkgs/kokoro-narrate/README.md)
+for voice selection and dependency updates.
+
 ## Repo Map
 
 - `modules/`: flake-parts modules (hosts, platform, packages, home, services).
