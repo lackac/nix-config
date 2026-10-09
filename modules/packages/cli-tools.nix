@@ -35,6 +35,7 @@
 
         awscli2
         croc
+        gogcli
         hunspell
       ];
     };
