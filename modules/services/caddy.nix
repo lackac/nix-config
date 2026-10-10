@@ -7,7 +7,7 @@ let
     pkgs:
     pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/dnsimple@v0.0.0-20251214142352-69317c3989f0" ];
-      hash = "sha256-ov1Oidv51XRyC2W+SvXev78hJ0BH92Noy8zilw+80XU=";
+      hash = "sha256-GKz727/WG37xXLE92wW7aYF2VV2pUWLokPNJvBnfWjc=";
     };
 in
 {
