@@ -25,6 +25,7 @@ let
     livebook
     caddy
     tailscale
+    tailscale-home-router
   ];
 
   boronInline = {

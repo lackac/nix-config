@@ -19,6 +19,7 @@ let
 
     # Features
     tailscale
+    tailscale-home-router
     postgres
     mattermost
     git
