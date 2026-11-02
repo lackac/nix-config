@@ -141,6 +141,7 @@
           };
 
           git.autoFetch = false;
+          git.overrideGpg = true;
           confirmOnQuit = false;
         };
       };
