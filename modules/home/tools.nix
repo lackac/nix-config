@@ -23,6 +23,7 @@ in
         tmux
         tealdeer
         units
+        worktrunk
         yazi
         zoxide
       ];
