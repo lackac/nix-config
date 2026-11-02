@@ -53,6 +53,10 @@
           setw -g other-pane-height 15
           setw -g other-pane-width 80
 
+          # Keep popups on the terminal palette rather than tmux's grey defaults.
+          set -gw popup-style "fg=default,bg=default"
+          set -gw popup-border-style "fg=default,bg=default"
+
           unbind s
           bind C-e switch-client -l
           bind C-a send-prefix
