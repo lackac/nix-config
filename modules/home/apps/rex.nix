@@ -52,7 +52,6 @@
             rex = "/Applications/Rex.app/Contents/Helpers/Rex Server.rex/Contents/MacOS/rex",
             fzf = "${lib.getExe pkgs.fzf}",
             zoxide = "${lib.getExe pkgs.zoxide}",
-            tree = "${lib.getExe pkgs.tree}",
             lazygit = "${lib.getExe pkgs.lazygit}",
             python3 = "${lib.getExe pkgs.python3}",
             direnv = "${lib.getExe pkgs.direnv}",
