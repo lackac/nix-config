@@ -53,10 +53,9 @@
             fzf = "${lib.getExe pkgs.fzf}",
             zoxide = "${lib.getExe pkgs.zoxide}",
             lazygit = "${lib.getExe pkgs.lazygit}",
-            python3 = "${lib.getExe pkgs.python3}",
+            node = "${lib.getExe pkgs.nodejs}",
             direnv = "${lib.getExe pkgs.direnv}",
             zsh = "${lib.getExe pkgs.zsh}",
-            extrakto = "${pkgs.tmuxPlugins.extrakto}/share/tmux-plugins/extrakto/extrakto.py",
           }
         '';
       };
