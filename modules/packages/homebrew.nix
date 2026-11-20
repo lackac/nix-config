@@ -14,6 +14,7 @@
         enableFishIntegration = false;
         enableZshIntegration = false;
         taps = {
+          "anomalyco/homebrew-tap" = inputs.homebrew-anomalyco;
           "homebrew/homebrew-core" = inputs.homebrew-core;
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
         };

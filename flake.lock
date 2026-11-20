@@ -375,6 +375,22 @@
         "type": "github"
       }
     },
+    "homebrew-anomalyco": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794965641,
+        "narHash": "sha256-7k1//dPtYVnTD5fhtehfutxrv7FUKTwa3tj5mLgTJRA=",
+        "owner": "anomalyco",
+        "repo": "homebrew-tap",
+        "rev": "582e67321558cfab76f1813db3fbf96880659d12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anomalyco",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "homebrew-cask": {
       "flake": false,
       "locked": {
@@ -766,14 +782,16 @@
         "nvf": "nvf",
         "opencode-nvim": "opencode-nvim",
         "review-nvim": "review-nvim",
+        "smart-splits-backend-rex": "smart-splits-backend-rex",
+        "smart-splits-backend-tmux": "smart-splits-backend-tmux",
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
-        "lastModified": 1793646665,
-        "narHash": "sha256-nAdi6lfloDPSSs7Wo9yPvCv7WAqrvQYu1Pdz/BlX4Ts=",
+        "lastModified": 1795173630,
+        "narHash": "sha256-9GDPNiTYhj3rM5iYF/jtL0rXxdE4xomrybu0FZ7EsS0=",
         "owner": "lackac",
         "repo": "nvf-config",
-        "rev": "6bed26f0030a949765c4b47cb72f34ea8cc74478",
+        "rev": "ad311d4d2b0de58338c3675455ad3acbac97ce0b",
         "type": "github"
       },
       "original": {
@@ -836,6 +854,23 @@
         "type": "github"
       }
     },
+    "rex": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795116584,
+        "narHash": "sha256-sodLKItgiZdA4JQowYVogqE02b4SmGTPB1ux9pyEUrk=",
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/preview/0.1.0-preview.22.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/preview.tar.gz"
+      }
+    },
     "root": {
       "inputs": {
         "cli-toolbox": "cli-toolbox",
@@ -855,9 +890,44 @@
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixpkgs": "nixpkgs_5",
         "nvf-config": "nvf-config",
+        "rex": "rex",
         "sops-nix": "sops-nix",
         "srvos": "srvos",
         "treefmt-nix": "treefmt-nix_5"
+      }
+    },
+    "smart-splits-backend-rex": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793973999,
+        "narHash": "sha256-91iWKOJL+qFPaHEMMNt08SV7xoipMOKqIgZRuZpDs+w=",
+        "owner": "rawnly",
+        "repo": "smart-splits-backend-rex",
+        "rev": "68f54325975ad47b03a968a3f201081bfadc0ff5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rawnly",
+        "repo": "smart-splits-backend-rex",
+        "rev": "68f54325975ad47b03a968a3f201081bfadc0ff5",
+        "type": "github"
+      }
+    },
+    "smart-splits-backend-tmux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790943526,
+        "narHash": "sha256-RcJdM6wFHZOEOK+cXVIT10anktqGgIilPmojFpdY+4g=",
+        "owner": "smart-splits-nvim",
+        "repo": "backend-tmux",
+        "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "smart-splits-nvim",
+        "repo": "backend-tmux",
+        "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
+        "type": "github"
       }
     },
     "sops-nix": {

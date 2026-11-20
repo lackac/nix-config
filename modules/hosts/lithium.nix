@@ -21,6 +21,7 @@ let
     onePassword
     onePasswordSshAgent
     opencode-desktop
+    rex
     ollama
     ollama-tailnet-proxy
     postgres
@@ -38,6 +39,7 @@ let
       brews = [ "nextdns" ];
 
       casks = [
+        "anomalyco/tap/hex"
         "autodesk-fusion"
         "discord"
         "iina"

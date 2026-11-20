@@ -55,6 +55,11 @@
       flake = false;
     };
 
+    homebrew-anomalyco = {
+      url = "github:anomalyco/homebrew-tap";
+      flake = false;
+    };
+
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -81,6 +86,11 @@
 
     nvf-config = {
       url = "github:lackac/nvf-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    rex = {
+      url = "https://pkgs.superlogical.com/rex/nix/preview.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
