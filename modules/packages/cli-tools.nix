@@ -12,6 +12,7 @@
         fd
         jq
         just
+        mdcat
         ripgrep
         sad
         yt-dlp

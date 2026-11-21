@@ -219,3 +219,20 @@ After the first successful `darwin-switch`, you will likely still want to
 finish interactive setup for the GUI apps you actually plan to use on this
 host. Review the apps present on the machine and decide which ones need
 sign-in, config restore, or data migration.
+
+### Hex dictation
+
+Hex is installed by Homebrew on `lithium`, but its settings aren't managed by
+Nix. To bring your current setup to a new Mac:
+
+1. Quit Hex on the new Mac. From the old Mac or a private backup, copy the
+   contents of `~/Library/Application Support/hex/settings.json` to the same
+   path on the new Mac. Back up any existing destination file first. This
+   carries over shortcuts, vocabulary, and the cleanup prompt and model choice
+   without copying dictation history, logs, or downloaded models.
+2. Open Hex, grant microphone and Accessibility permissions, and download the
+   selected speech model if needed. Check the microphone and shortcut on the
+   new Mac.
+3. If the cleanup prompt uses OpenCode, connect the same provider on the new
+   Mac (for example, sign in with ChatGPT for an OpenAI subscription). Dictate
+   a short sentence to verify both the shortcut and the cleanup.
