@@ -16,6 +16,7 @@ let
     # Hardware
     hardware-n100
     disko-nvme
+    disko-nvme-xbootldr
 
     # Features
     container-runtime
