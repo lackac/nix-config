@@ -28,6 +28,7 @@
           ln -s ${opencode}/bin/opencode2 "$out/bin/opencode"
           ln -s ${opencode}/bin/opencode2 "$out/bin/oc"
         '')
+        inputs.llm-agents.packages.${system}.opencode-browse
       ];
 
       xdg.configFile."opencode".source = config.lib.file.mkOutOfStoreSymlink repo;
