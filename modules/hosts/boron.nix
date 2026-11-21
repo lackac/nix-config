@@ -27,6 +27,7 @@ let
     caddy
     tailscale
     tailscale-home-router
+    rex
   ];
 
   boronInline = {

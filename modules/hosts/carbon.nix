@@ -25,6 +25,7 @@ let
     mattermost
     git
     caddy
+    rex
   ];
 
   carbonInline = {

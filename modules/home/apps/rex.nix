@@ -1,5 +1,50 @@
 { config, inputs, ... }:
 {
+  flake.modules.nixos.rex =
+    {
+      config,
+      lib,
+      vars,
+      ...
+    }:
+    let
+      rex = config.services.rex.package;
+    in
+    {
+      imports = [ inputs.rex.nixosModules.default ];
+
+      services.rex.loginServer = {
+        enable = true;
+        accounts.${vars.username}.principals = [ "tailscale:lackac@github" ];
+        tailscaleServe = {
+          enable = true;
+          httpsPort = 7297;
+        };
+      };
+
+      users.users.${vars.username}.linger = true;
+
+      # Keep the personal server running for both native and SSH clients.
+      systemd.user.services.rex = {
+        description = "Personal Rex server";
+        wantedBy = [ "default.target" ];
+        unitConfig.ConditionUser = vars.username;
+        environment = {
+          TERMINFO_DIRS = "${rex}/share/terminfo:";
+          REX_CGROUP_DELEGATED = "1";
+        };
+        serviceConfig = {
+          Type = "notify";
+          ExecStart = "${lib.getExe rex} server run --log-format text";
+          Restart = "on-failure";
+          RestartSec = "5s";
+          KillMode = "mixed";
+          Delegate = true;
+          DelegateSubgroup = "server";
+        };
+      };
+    };
+
   flake.modules.darwin.rex = {
     home-manager.users.${config.vars.username}.imports = [ config.flake.modules.homeManager.rex ];
   };
