@@ -1,7 +1,7 @@
 set -euo pipefail
 
 # Rules are scope,regex,replacement; only the first two commas delimit fields.
-manifest_path="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/session-name-rules.csv"
+manifest_path="${XDG_CONFIG_HOME:-$HOME/.config}/session-name-rules.csv"
 rules=()
 
 load_rules() {

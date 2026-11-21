@@ -12,7 +12,10 @@ trap 'rm -rf -- "$tmp"' EXIT
 export HOME="$tmp/home.[test]"
 export XDG_CONFIG_HOME="$tmp/config"
 mkdir -p "$HOME/.config/tmux" "$XDG_CONFIG_HOME/tmux"
-manifest="$XDG_CONFIG_HOME/tmux/session-name-rules.csv"
+manifest="$XDG_CONFIG_HOME/session-name-rules.csv"
+printf '%s\n' 'path,^~$,Legacy' |
+  tee "$XDG_CONFIG_HOME/tmux/session-name-rules.csv" \
+    "$HOME/.config/tmux/session-name-rules.csv" > /dev/null
 
 check() {
   printf '%s\n' "$1" > "$tmp/expected"
@@ -24,6 +27,8 @@ check() {
 
 check $' keep spaces \nkeep\\slashes\tand tabs' \
   '/missing' ' keep spaces ' '/other' $'keep\\slashes\tand tabs'
+check 'Original' "$HOME" Original
+XDG_CONFIG_HOME= check 'Original' "$HOME" Original
 printf '%s\n' 'name,^Default$,Must not read' > "$manifest"
 chmod a-r "$manifest"
 if [[ ! -r "$manifest" ]]; then
@@ -60,7 +65,9 @@ check $'[alpha],team\n[beta],team\nHome\nUsed default\nPrefix:tail\nGone\nother\
   "$HOME/folder" Original "$tmp/homext/folder" Original \
   '/missing' 'No rule'
 
-mv "$manifest" "$HOME/.config/tmux/session-name-rules.csv"
+mv "$manifest" "$HOME/.config/session-name-rules.csv"
+check 'Original' "$HOME" Original
+XDG_CONFIG_HOME= check 'Home' "$HOME" Original
 (
   unset XDG_CONFIG_HOME
   check 'Home' "$HOME" Original
