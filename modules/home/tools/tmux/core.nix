@@ -94,7 +94,7 @@
           unbind l
           bind l popup -E -w 80% -h 80% lazygit
           bind g split-window -h -b -p 62 -c "#{pane_current_path}" lazygit
-          bind v split-window -h -b -p 62 -c "#{pane_current_path}" nvim
+          bind v split-window -h -b -p 62 -c "#{pane_current_path}" nvim --cmd 'call system(["tmux", "set-option", "-p", "-t", $TMUX_PANE, "@opencode-editor", v:servername])'
           bind X run-shell "tmux-session-kill"
           unbind m
           bind m command-prompt -p "man" "split-window -h 'exec man %%'"
