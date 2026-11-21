@@ -159,9 +159,26 @@
           };
 
           aliases = {
-            stack = [ "rebase" "--after" "trunk()" "--before" "closest_merge(@)" "--revision" ];
-            stage = [ "stack" "closest_merge(@)+:: ~ empty()" ];
-            restack = [ "rebase" "--onto" "trunk()" "--source" "roots(trunk()..) & mutable()" "--simplify-parents" ];
+            stack = [
+              "rebase"
+              "--after"
+              "trunk()"
+              "--before"
+              "closest_merge(@)"
+              "--revision"
+            ];
+            stage = [
+              "stack"
+              "closest_merge(@)+:: ~ empty()"
+            ];
+            restack = [
+              "rebase"
+              "--onto"
+              "trunk()"
+              "--source"
+              "roots(trunk()..) & mutable()"
+              "--simplify-parents"
+            ];
           };
 
           ui = {
