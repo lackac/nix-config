@@ -30,7 +30,7 @@ in
       ];
 
       virtualisation.oci-containers.containers.livebook = {
-        image = "ghcr.io/livebook-dev/livebook:0.19.7";
+        image = "ghcr.io/livebook-dev/livebook:0.19.10@sha256:216af978b9300980117ae8a362f866c9414026d55f98f15fa6d35def0699a348";
         autoStart = true;
         ports = [
           "127.0.0.1:${toString port}:${toString port}"
@@ -47,8 +47,10 @@ in
           LIVEBOOK_IFRAME_PORT = toString iframePort;
           LIVEBOOK_PROXY_HEADERS = "x-forwarded-for,x-forwarded-proto";
         };
-        extraOptions = [ "--pull=always" ];
       };
+
+      # If the first image pull fails at boot, allow time for DNS to recover.
+      systemd.services.podman-livebook.serviceConfig.RestartSec = "30s";
 
       services.caddy.extraConfig = ''
         ${hostName} {
