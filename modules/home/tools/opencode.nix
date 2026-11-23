@@ -33,6 +33,21 @@
 
       xdg.configFile."opencode".source = config.lib.file.mkOutOfStoreSymlink repo;
 
+      programs.zsh.initContent = ''
+        if [[ ''${START_OPENCODE:-} == 1 ]]; then
+          unset START_OPENCODE
+          autoload -Uz add-zsh-hook
+
+          # Run after direnv's precmd hook and keep the job in this shell for fg.
+          _start_opencode() {
+            add-zsh-hook -d precmd _start_opencode
+            command opencode
+            return 0
+          }
+          add-zsh-hook precmd _start_opencode
+        fi
+      '';
+
       home.activation.opencodeDirectory = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
         if [ ! -f "${repo}/opencode.jsonc" ]; then
           echo "OpenCode config checkout missing: ${repo}" >&2

@@ -79,7 +79,7 @@
             for sub in $(grep -v '^#' ''${XDG_CONFIG_HOME:-$HOME/.config}/subs); do
               [[ ''${sub:0:1} == "/" ]] || sub=$HOME/Code/$sub
               if [[ -x $sub ]]; then
-                eval "$($sub init -)"
+                eval "$("$sub" init - zsh)"
               fi
             done
           fi
